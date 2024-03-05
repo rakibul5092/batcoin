@@ -1,0 +1,20 @@
+<ion-card (click)="openProduct()">
+  <ion-thumbnail>
+    <div class="onsale-wrapper" *ngIf="item.prevPrice">
+      <p>{{ 'USER.PRODUCT.RELATED_ITEM.SALE' | translate }}</p>
+    </div>
+    <div class="cart-wrapper">
+      <a>{{ 'USER.PRODUCT.RELATED_ITEM.VIEW_PRODUCT' | translate }}</a>
+    </div>
+    <app-image-with-loading class="related-image" [image]="item.imageUrl"> </app-image-with-loading>
+  </ion-thumbnail>
+  <ion-card-header>
+    <ion-card-title>{{ item.title | dynamicTranslate }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div class="price-wrapper">
+      <p class="previous-price" *ngIf="item.prevPrice">${{ item.prevPrice }}</p>
+      <p class="current-price">${{ item.currentPrice }}</p>
+    </div>
+  </ion-card-content>
+</ion-card>

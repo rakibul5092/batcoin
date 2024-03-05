@@ -1,0 +1,29 @@
+<div class="title-box close-button-container">
+  <h2 mat-dialog-title class="tab-title">
+    {{ 'ADMIN.PRODUCTS.ADD_IMAGE_VIA_URL' | translate }}
+  </h2>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" [disabled]="imageLoading" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" (ngSubmit)="downloadImage()">
+    <div>
+      <mat-form-field class="full-width-field-wrapper">
+        <mat-label>{{ 'ADMIN.PRODUCTS.IMAGE_URL' | translate }}</mat-label>
+        <input matInput formControlName="url" [placeholder]="'ADMIN.PRODUCTS.IMAGE_URL' | translate" (keyup.esc)="close()" (keyup.enter)="downloadImage()" trimFieldValue />
+        <mat-error>( {{ 'REQUIRED' | translate }})</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="accent" type="button" (click)="close()" [disabled]="imageLoading" [matTooltip]="'ADMIN.PRODUCTS.CANCEL_ALL_CHANGES' | translate">
+    <span>{{ 'ADMIN.PRODUCTS.CANCEL' | translate }}</span>
+  </button>
+  <button mat-raised-button (click)="downloadImage()" color="primary" type="submit" [disabled]="imageLoading" [matTooltip]="'ADMIN.PRODUCTS.ADD_IMAGE' | translate">
+    <span *ngIf="!imageLoading">{{ 'ADMIN.PRODUCTS.ADD_IMAGE' | translate }}</span>
+    <span *ngIf="imageLoading">{{ 'COMMON.ADDING' | translate }}</span>
+  </button>
+</mat-dialog-actions>

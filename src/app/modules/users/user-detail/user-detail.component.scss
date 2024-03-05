@@ -1,0 +1,39 @@
+::ng-deep .product-detail .mat-card-header-text {
+  margin: 0 0 10px;
+}
+mat-form-field {
+  width: 100% !important;
+}
+
+:host ::ng-deep {
+  .ng-select.ng-invalid.ng-touched {
+    .ng-select-container .ng-value-container .ng-placeholder {
+      color: red;
+    }
+
+    .ng-select-container:after {
+      border-bottom-color: red;
+    }
+  }
+}
+
+small.field-error {
+  color: red;
+  font-size: 75%;
+  font-weight: 400;
+  line-height: 1.125;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  letter-spacing: normal;
+}
+
+// to take care of the ng select 1.25rem bottom padding;
+ng-select + small.field-error {
+  display: block;
+  margin-top: -1.25em;
+}
+
+form {
+  mat-form-field {
+    margin-bottom: 20px;
+  }
+}

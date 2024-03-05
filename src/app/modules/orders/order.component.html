@@ -1,0 +1,17 @@
+<lib-ag-grid
+  [enableExport]="true"
+  [disableAdd]="true"
+  [loading$]="loading$"
+  [title]="'ADMIN.ORDERS.ORDERS' | translate"
+  [rowData]="orders"
+  [columnDefs]="columnDefs"
+  [pagination]="true"
+  [showTrashButton]="false"
+  [model]="model"
+  (refreshData)="getData()"
+  (pageChange)="pageChange($event)"
+  (addData)="addEditItem()"
+  (exportEvent)="onExport($event)"
+  (rowClickedEvent)="onRowClicked($event)"
+  [columnsHideStrategy]="columnsHideStrategy"
+></lib-ag-grid>

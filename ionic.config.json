@@ -1,0 +1,7 @@
+{
+  "name": "bat-coin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

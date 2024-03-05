@@ -1,0 +1,163 @@
+.panel {
+  max-width: 85%;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 100% !important;
+}
+
+@media screen and (min-width: 768px) {
+  .panel {
+    margin-top: 5rem;
+  }
+
+  .form-col {
+    margin-right: 1rem;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+hr {
+  background-color: #ccc;
+}
+
+.margin-top-bottom {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+:host ::ng-deep .mat-expansion-panel-content {
+  background: #f8f8f8;
+  border-top: 1px solid #e3dddd;
+
+  .mat-expansion-panel-body {
+    padding-bottom: 0px !important;
+  }
+
+  .mat-checkbox-label {
+    white-space: pre-wrap !important;
+  }
+
+  ion-label {
+    white-space: pre-wrap !important;
+  }
+}
+.cms-section,
+.cms-section-common {
+  background: #fff;
+  border: 1px solid #e3dddd;
+  padding: 10px 15px 5px 0;
+  margin-bottom: 15px;
+
+  &:first-child {
+    margin-top: 15px;
+  }
+}
+.cms-section-common {
+  padding: 10px 10px 0 10px;
+}
+.form-group {
+  padding: 7px 7px 0 7px;
+}
+
+.cms-images-cards {
+  position: relative;
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  overflow: hidden;
+  padding: 30px 0;
+
+  div {
+    width: 11.5rem;
+    border: 1px solid #f1f1f1;
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: auto;
+      height: 120px;
+      object-fit: cover;
+      margin: 0 auto;
+      position: relative;
+      display: block;
+    }
+
+    .mat-icon-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #222;
+      color: #fff;
+      font-size: 12px;
+      height: 25px;
+      width: 25px;
+      line-height: 10px;
+    }
+  }
+
+  div.empty-img {
+    border: none;
+    img {
+      display: none;
+    }
+  }
+}
+
+::ng-deep .upload-button {
+  position: relative;
+  display: block;
+}
+
+@media screen and (max-width: 780px) {
+  :host ::ng-deep {
+    lib-address-form {
+      ion-row {
+        ion-col {
+          min-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  ::ng-deep {
+    .mat-content {
+      flex-direction: column !important;
+    }
+  }
+
+  mat-expansion-panel-header {
+    height: auto !important;
+    padding: 24px;
+  }
+
+  .checkbox-layout .mat-checkbox-label {
+    line-height: 1 !important;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .cms-images-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .panel {
+    max-width: calc(100% - 15px);
+  }
+
+  :host ::ng-deep {
+    .mat-expansion-panel-body {
+      padding: 0 16px 16px;
+    }
+  }
+}

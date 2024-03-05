@@ -1,0 +1,266 @@
+::ng-deep .ngxImageZoomContainer {
+  width: 100% !important;
+  height: inherit !important;
+  max-height: 500px;
+  margin-top: 0 !important;
+
+  & > img {
+    max-width: 100% !important;
+    max-height: 500px;
+    object-fit: contain;
+  }
+}
+
+lib-ngx-image-zoom {
+  position: relative;
+  display: flex;
+}
+
+.image-zoom-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .image-zoom {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .onsale-wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    top: 5%;
+    left: 2.5%;
+    z-index: 10;
+
+    p {
+      position: relative;
+      text-align: center;
+      margin: 0;
+      text-transform: uppercase;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 60%;
+        height: 2px;
+        border-radius: 20%;
+        top: 125%;
+        left: 50%;
+        background: #fff;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  ion-img {
+    object-fit: cover;
+  }
+}
+
+.product-details-wrapper {
+  justify-content: center;
+
+  .image-product-wrapper {
+    ion-row {
+      display: flex;
+      justify-content: center;
+
+      ion-col {
+        padding: 0;
+        height: 100%;
+
+        &.image-zoom-wrapper {
+          padding-left: 5px;
+          height: fit-content;
+        }
+
+        &.slide-images {
+          display: flex;
+          flex-direction: column;
+          height: 500px;
+          overflow: auto;
+
+          app-image-with-loading {
+            min-height: 120px;
+            max-height: 120px;
+            overflow: hidden;
+          }
+
+          ::ng-deep img {
+            cursor: pointer;
+            max-height: 100px;
+            width: 100%;
+            height: fit-content;
+            margin: 0 auto 20px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+
+  .text-wrapper {
+    margin: 0 auto;
+
+    h2,
+    h3,
+    h4 {
+      color: var(--ion-text-color);
+      text-align: left;
+      transform-origin: 50% 50%;
+      opacity: 1;
+      transform: translate(0px, 0px);
+      font-weight: 300;
+    }
+
+    h2 {
+      font-size: 25px;
+      line-height: 30px;
+      letter-spacing: 3px;
+      font-weight: 400;
+      position: relative;
+      width: fit-content;
+
+      &:before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        bottom: -5px;
+        background: var(--ion-text-color);
+        height: 2px;
+        width: 20%;
+        transition: all 0.5s ease;
+      }
+    }
+
+    h3 {
+      font-size: 13px;
+      line-height: 33px;
+      font-style: normal;
+    }
+
+    h4 {
+      color: #7d7d7d;
+      line-height: 25px;
+      letter-spacing: 3px;
+      font-size: 13px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 300;
+      margin-top: 15px;
+    }
+
+    .price-wrapper {
+      display: flex;
+      transition: all 0.5s ease;
+
+      p {
+        &.previous-price {
+          margin-right: 10px;
+          text-decoration: line-through;
+        }
+      }
+    }
+
+    .cart-options {
+      display: flex;
+      margin-top: 30px;
+
+      ion-label {
+        color: var(--ion-text-color) !important;
+      }
+
+      ion-input {
+        border-bottom: 1px solid #ccc;
+      }
+
+      ion-item::part(native) {
+        background-color: transparent;
+        padding-left: 0;
+      }
+
+      button {
+        color: #909090;
+        font-size: 14px;
+        background-color: transparent;
+        border: 1px solid #ccc;
+        padding: 25px 40px;
+        margin-left: 10px;
+        letter-spacing: 3px;
+        transition: all 0.5s ease;
+        text-transform: uppercase;
+        line-height: 23px;
+
+        &:hover {
+          background-color: #000;
+          color: #fff;
+          border-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+ion-content::part(native) {
+  background: #e3e3e3 !important;
+}
+
+.related-products {
+  margin-top: 80px;
+
+  ion-row {
+    margin: 20px auto 0;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .related-products {
+    ion-row {
+      justify-content: space-around;
+    }
+  }
+}
+
+.required-class {
+  font-size: 12px;
+}
+
+.invalid-input {
+  border-bottom: 1px solid #f44336 !important;
+}

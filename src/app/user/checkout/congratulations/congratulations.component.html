@@ -1,0 +1,87 @@
+<ion-content>
+  <ion-grid class="container">
+    <ion-row class="ion-justify-content-around">
+      <ion-col size="12" size-lg="10" class="ion-padding">
+        <ion-row class="content-wrappper">
+          <ion-col size="12">
+            <p>
+              {{ 'USER.CHECKOUT.CONGRATULATIONS.HEY' | translate }} <span class="font-weight-bold">{{ order.first_name }},</span>
+            </p>
+            <div class="">
+              <mat-icon>check</mat-icon>
+              {{ 'USER.CHECKOUT.CONGRATULATIONS.YOUR_ORDER_IS_CONFIRMED' | translate }}
+            </div>
+            <p>{{ 'USER.CHECKOUT.CONGRATULATIONS.THANKS_FOR_SHOPPING' | translate }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="order-info-wrappper">
+          <ion-item class="form-heading-wrapper" lines="none">
+            <ion-label class="form-heading">{{ 'USER.CHECKOUT.CONGRATULATIONS.ORDER_DETAILS' | translate }}</ion-label>
+          </ion-item>
+        </ion-row>
+        <ion-row class="order-info-wrappper order-info-container" [ngClass]="{ 'order-info-container-shipment': order.shipment }">
+          <ion-col [size]="order.shipment ? '8' : '12'">
+            <div class="header-wrapper white-border">
+              <p class="header">{{ 'USER.CHECKOUT.CONGRATULATIONS.PRODUCT' | translate }}</p>
+              <p class="header">{{ 'USER.CHECKOUT.CONGRATULATIONS.SUBTOTAL' | translate }}</p>
+            </div>
+            <div class="header-wrapper product-heading" *ngFor="let item of order.cart.items">
+              <p class="header">{{ item.product.title | dynamicTranslate }} x {{ item.quantity }}</p>
+              <p class="value">${{ item.product.currentPrice | number: '1.2-2' }}</p>
+            </div>
+            <div class="header-wrapper">
+              <p class="header">{{ 'USER.CHECKOUT.CONGRATULATIONS.Subtotal' | translate }}</p>
+              <p class="value">${{ order.cart.total_price | number: '1.2-2' }}</p>
+            </div>
+            <div class="header-wrapper">
+              <p class="header">{{ 'USER.CHECKOUT.CONGRATULATIONS.SHIPPING' | translate }}</p>
+              <p class="value">{{ order.address_line_1 }} {{ order.town }} {{ order.state }} {{ order.country }}, {{ order.postal_code }}.</p>
+            </div>
+            <div class="header-wrapper">
+              <p class="header">{{ 'USER.CHECKOUT.CONGRATULATIONS.TOTAL' | translate }}</p>
+              <p class="value header">${{ order.cart.total_price | number: '1.2-2' }}</p>
+            </div>
+          </ion-col>
+
+          <ion-col [size]="'4'" *ngIf="order.shipment" class="shipment-col">
+            <div>
+              <img src="assets/icon/shipping/shipping.svg" alt="" class="trackerIcon" />
+              <a [href]="order.shipment.tracker.public_url" target="_blank"> {{ 'USER.CHECKOUT.CONGRATULATIONS.SHIPPING_TRACKER' | translate }}</a>
+            </div>
+
+            <div>
+              <span class="header">{{ 'USER.CHECKOUT.ADDRESS.ADDRESS' | translate }} : </span>
+              <span class="value">{{ order.address_line_1 }} {{ order.town }} {{ order.state }} {{ order.country }}, {{ order.postal_code }}.</span>
+            </div>
+
+            <div *ngIf="order.shipment.selected_rate">
+              <span class="header">{{ 'USER.CHECKOUT.CONGRATULATIONS.SHIPPING_RATE' | translate }} : </span>
+              <span>
+                {{ order.shipment.selected_rate.rate }}
+                {{ order.shipment.selected_rate.currency }}
+              </span>
+            </div>
+          </ion-col>
+          <ion-col [size]="'12'">
+            <div class="print-container" *ngIf="order.shipment">
+              <button mat-raised-button color="primary" (click)="downloadReceipt()">
+                <img src="assets/icon/shipping/print.svg" alt="" class="trackerIcon" />
+                {{ 'USER.CHECKOUT.CONGRATULATIONS.RECEIPT' | translate }}
+              </button>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="cart-wrapper">
+            <div class="message-wrapper">
+              <button type="submit" color="primary" expand="block" (click)="goToList()" class="btn">
+                {{ 'USER.CHECKOUT.CONGRATULATIONS.RETURN_TO_SHOP' | translate }}
+              </button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <app-footer></app-footer>
+  </ion-grid>
+</ion-content>

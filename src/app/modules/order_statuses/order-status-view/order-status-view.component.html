@@ -1,0 +1,27 @@
+<div class="title-box close-button-container">
+  <h2 mat-dialog-title class="tab-title">
+    {{ 'ADMIN.ORDER_STATUS.ORDER_STATUS_DETAILS' | translate }}
+  </h2>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dialogRef.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <div class="status-details-content">
+    <section>
+      <h4>{{ 'ADMIN.ORDER_STATUS.NAME' | translate }}:</h4>
+      <p class="indent">{{ data.name }}</p>
+    </section>
+
+    <section>
+      <h4>{{ 'ADMIN.ORDER_STATUS.DESCRIPTION' | translate }}:</h4>
+      <p class="indent">{{ data.description }}</p>
+    </section>
+
+    <section>
+      <h4>{{ 'ADMIN.ORDER_STATUS.ACTIVE' | translate }}:</h4>
+      <p class="indent">{{ data.active }}</p>
+    </section>
+  </div>
+</mat-dialog-content>

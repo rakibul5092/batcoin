@@ -1,0 +1,67 @@
+::ng-deep swiper {
+  height: 100%;
+
+  app-slide {
+    height: inherit;
+    overflow: hidden;
+    * {
+      transition: top 0.5s 0.3s ease-in-out, opacity 0.75s 0.3s ease-in-out, transform 0.75s 0.3s ease-in-out, width 0.5s ease-in-out !important;
+    }
+    .image-wrapper {
+      opacity: 0;
+      top: -130% !important;
+      z-index: -1;
+    }
+    button {
+      transform: translateY(20vh);
+    }
+    .coin-img {
+      top: 130%;
+      left: 78.5%;
+      opacity: 0;
+    }
+    .text-wrapper {
+      opacity: 0;
+    }
+  }
+
+  .swiper-slide-active {
+    .image-wrapper {
+      opacity: 1;
+      top: 0 !important;
+      z-index: 0;
+      width: 80%;
+    }
+    button {
+      transform: translateY(0);
+    }
+
+    .coin-img {
+      top: 50%;
+      opacity: 1;
+      left: 78.5%;
+    }
+
+    .text-wrapper {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    app-slide {
+      .coin-img {
+        top: 130%;
+        left: 50%;
+      }
+    }
+    .swiper-slide-active {
+      .image-wrapper {
+        width: 100%;
+      }
+      .coin-img {
+        top: 80%;
+        left: 50%;
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<ion-content>
+  <ion-grid class="container">
+    <ion-row class="ion-justify-content-around">
+      <ion-col size="12" size-lg="10" class="ion-padding">
+        <app-title [content]="'USER.CHECKOUT.CHECKOUT' | translate"></app-title>
+        <ng-container *ngIf="showFormControls; else showSuccess">
+          <ion-row class="order-info-wrappper">
+            <ion-item class="form-heading-wrapper" lines="none">
+              <ion-label class="form-heading">{{'USER.CHECKOUT.ORDER_DETAILS' | translate}}</ion-label>
+            </ion-item>
+            <ion-col size="12">
+              <div class="header-wrapper white-border">
+                <p class="header">{{'USER.CHECKOUT.PRODUCT' | translate}}</p>
+                <p class="header">{{'USER.CHECKOUT.SUBTOTAL' | translate}}</p>
+              </div>
+              <div class="header-wrapper product-heading" *ngFor="let item of cart.items;">
+                <p class="header">{{ item.product.title |dynamicTranslate}} x {{ item.quantity }}</p>
+                <p class="value">${{ item.product.currentPrice | number:'1.2-2' }}</p>
+              </div>
+              <div class="header-wrapper">
+                <p class="header">{{'USER.CHECKOUT.Subtotal' | translate}}</p>
+                <p class="value">${{ cart.total_price | number:'1.2-2' }}</p>
+              </div>
+              <div class="header-wrapper">
+                <p class="header">{{'USER.CHECKOUT.TOTAL' | translate}}</p>
+                <p class="value header">${{ cart.total_price | number:'1.2-2' }}</p>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="checkout-wrapper">
+            <ion-col size="12">
+              <ion-item class="form-heading-wrapper" lines="none">
+                <ion-label class="form-heading">{{'USER.CHECKOUT.BILLING_DETAILS' | translate}}</ion-label>
+              </ion-item>
+              <app-address-form (submitEvent)="onSuccess()" (stepperEmitter)="onStepperInit($event)" #addressForm></app-address-form>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+        <ng-template #showSuccess>
+          <ion-row>
+            <ion-col size="12" *ngIf="showSuccess">
+              <div class="cart-wrapper">
+                <div class="message-wrapper">
+                  <p>{{'USER.CHECKOUT.YOUR_ORDER_IS_PLACED' | translate}}.</p>
+                  <button type="submit" color="primary" expand="block" class="btn" (click)="goToList()">{{'USER.CHECKOUT.RETURN_TO_SHOP' | translate}}</button>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+    <app-footer [title]="cmsSettings?.name" [copyrightText]="cmsSettings?.copyright_text"></app-footer>
+  </ion-grid>
+</ion-content>

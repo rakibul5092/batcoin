@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /home/ec2-user
+yes | cp -rf client/. /var/www/batcoin

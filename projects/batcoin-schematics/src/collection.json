@@ -1,0 +1,20 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "module": {
+      "description": "Batcoin create module schematic.",
+      "factory": "./batcoin-schematics/module/index#batcoinModuleSchematic",
+      "schema": "./batcoin-schematics/module/schema.json"
+    },
+    "service": {
+      "description": "Batcoin create Service schematic.",
+      "factory": "./batcoin-schematics/service/index#batcoinServiceSchematic",
+      "schema": "./batcoin-schematics/service/schema.json"
+    },
+    "model": {
+      "description": "Batcoin create Model schematic.",
+      "factory": "./batcoin-schematics/model/index#batcoinModelSchematic",
+      "schema": "./batcoin-schematics/model/schema.json"
+    }
+  }
+}

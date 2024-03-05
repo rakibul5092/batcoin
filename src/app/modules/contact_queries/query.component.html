@@ -1,0 +1,16 @@
+<lib-ag-grid
+  [enableExport]="true"
+  [disableAdd]="true"
+  [loading$]="loading$"
+  [title]="'ADMIN.CONTACT_QUERIES.CONTACT_QUERIES' | translate"
+  [rowData]="queries"
+  [columnDefs]="columnDefs"
+  [pagination]="true"
+  [showTrashButton]="false"
+  [model]="model"
+  (refreshData)="getData()"
+  (pageChange)="pageChange($event)"
+  (addData)="addEditItem()"
+  (exportEvent)="onExport($event)"
+  [columnsHideStrategy]="columnsHideStrategy"
+></lib-ag-grid>

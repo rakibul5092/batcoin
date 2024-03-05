@@ -1,0 +1,109 @@
+ion-card {
+  .image-container {
+    min-height: 200px;
+    max-height: 200px;
+  }
+  cursor: pointer;
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  ::ng-deep.list-item-image img {
+    max-width: 80%;
+    object-fit: contain !important;
+  }
+
+  ion-card-header {
+    padding: 20px 0 0;
+    margin: auto;
+
+    ion-card-title {
+      font-size: 18px;
+      line-height: 27px;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+  }
+
+  ion-card-content {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    height: 35px;
+    position: relative;
+    margin-top: 10px;
+
+    .price-wrapper {
+      display: flex;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.5s ease;
+
+      .previous-price {
+        margin-right: 10px;
+        text-decoration: line-through;
+      }
+      .current-price {
+      }
+    }
+
+    .underline-from-left {
+      color: var(--ion-text-color);
+      font-size: 13px;
+      letter-spacing: 3px;
+      font-weight: 300;
+      text-transform: uppercase;
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -moz-osx-font-smoothing: grayscale;
+      position: absolute;
+      width: 60%;
+      left: -100%;
+      transition: all 0.5s ease;
+
+      &:before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        right: 100%;
+        bottom: -3px;
+        background: var(--ion-text-color);
+        height: 1px;
+        -webkit-transition-property: right;
+        transition-property: right;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+      }
+
+      &:hover:before {
+        right: 0;
+      }
+    }
+  }
+
+  &:hover ion-card-content {
+    .price-wrapper {
+      left: 150%;
+    }
+    .underline-from-left {
+      left: 20%;
+    }
+  }
+}
+::ng-deep .image-container img {
+  display: block;
+  width: 397px !important;
+  height: 200px !important;
+  object-fit: contain !important;
+}

@@ -1,0 +1,6 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "bat-coin",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

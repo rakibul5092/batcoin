@@ -1,0 +1,22 @@
+<lib-ag-grid
+  [defaultColDef]="defaultColDef"
+  [enableDrag]="true"
+  [enableExport]="true"
+  [loading$]="loading$"
+  [title]="'ADMIN.PRODUCTS.PRODUCTS' | translate"
+  [rowData]="products | sort: 'index'"
+  [columnDefs]="columnDefs"
+  [pagination]="false"
+  [showTrashButton]="true"
+  [showDeletedItems]="showDeletedItems"
+  [model]="model"
+  (refreshData)="getData()"
+  (pageChange)="pageChange($event)"
+  (addData)="addEditItem()"
+  (changeData)="toggleDeletedItems()"
+  (saveDraggedPositionsEvent)="saveDraggedPositions($event)"
+  (rowClickedEvent)="onRowClicked($event)"
+  (exportEvent)="onExport($event)"
+  [columnsHideStrategy]="columnsHideStrategy"
+  #productsGrid
+></lib-ag-grid>

@@ -1,0 +1,6 @@
+<div *ngIf="!params.data.read">
+  <button mat-icon-button color="primary" class="ag-grid-btn" aria-label="read" (click)="clickButton('markAsRead')" matTooltip="{{ 'ADMIN.MARK_AS_READ' | translate }}">
+    <mat-icon>check</mat-icon>
+  </button>
+</div>
+<div *ngIf="params.data.read" class="no-action">{{ 'ADMIN.NOTIFICATION_MESSAGE.NO_ACTION_REQUIRED' | translate }}</div>

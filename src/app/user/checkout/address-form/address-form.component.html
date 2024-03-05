@@ -1,0 +1,235 @@
+<mat-stepper class="mat-stepper" [orientation]="(stepperOrientation | async)!" [linear]="true" #stepper *ngIf="firstFormGroup && secondFormGroup && thirdFormGroup">
+  <mat-step [stepControl]="firstFormGroup" [label]="'USER.CHECKOUT.FILL_OUT_YOUR_NAME' | translate">
+    <form [formGroup]="firstFormGroup">
+      <ion-col class="form-group" size="12" size-md="6">
+        <ion-item>
+          <ion-label position="floating">
+            {{ 'USER.CHECKOUT.ADDRESS.FIRST_NAME' | translate }}
+          </ion-label>
+          <ion-input formControlName="first_name" autocomplete="on" name="first_name" (keydown)="onKeyDown($event)"></ion-input>
+        </ion-item>
+        <span class="error" *ngIf="firstFormGroup.controls.first_name.errors && firstFormGroup.controls.first_name.touched">{{
+          'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate
+        }}</span>
+      </ion-col>
+      <ion-col class="form-group px-md-5" size="12" size-md="6">
+        <ion-item>
+          <ion-label position="floating">
+            {{ 'USER.CHECKOUT.ADDRESS.LAST_NAME' | translate }}
+          </ion-label>
+          <ion-input formControlName="last_name" autocomplete="on" name="last_name" (keydown)="onKeyDown($event)"></ion-input>
+        </ion-item>
+        <span class="error" *ngIf="firstFormGroup.controls.last_name.errors && firstFormGroup.controls.last_name.touched">{{
+          'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate
+        }}</span>
+      </ion-col>
+      <div class="row">
+        <button mat-raised-button matStepperNext color="primary" [disabled]="firstFormGroup.invalid" (click)="onSubmit(firstFormGroup)">
+          {{ 'USER.CHECKOUT.ADDRESS.NEXT' | translate }}
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup" [label]="'USER.CHECKOUT.FILL_OUT_YOUR_ADDRESS' | translate">
+    <form [formGroup]="secondFormGroup">
+      <ion-row>
+        <ion-col class="form-group typeahead-group" size="12">
+          <ion-item>
+            <lib-google-address-input
+              [label]="'USER.CHECKOUT.ADDRESS.ADDRESS' | translate"
+              [inputValue]="secondFormGroup.controls.address.value"
+              (addressEvent)="handleAddressChange($event)"
+            >
+            </lib-google-address-input>
+          </ion-item>
+        </ion-col>
+        <ion-col class="form-group typeahead-group" size-lg="6" size-md="6" size-sm="12">
+          <ion-item class="ion-no-padding">
+            <ng-select
+              [items]="countriesList"
+              bindLabel="country_name"
+              bindValue="country_name"
+              formControlName="country"
+              [placeholder]="'USER.CHECKOUT.ADDRESS.COUNTRY' | translate"
+              appendTo="body"
+              class="typeahead"
+            >
+            </ng-select>
+          </ion-item>
+          <span class="error" *ngIf="secondFormGroup.controls.country.errors && secondFormGroup.controls.country.touched">{{
+            'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate
+          }}</span>
+        </ion-col>
+        <ion-col class="form-group typeahead-group" size-lg="6" size-md="6" size-sm="12">
+          <ion-item class="ion-no-padding">
+            <ng-select
+              [loading]="loadingStates"
+              [readonly]="loadingStates"
+              [items]="statesList"
+              bindLabel="state_name"
+              bindValue="state_name"
+              formControlName="state"
+              [placeholder]="'USER.CHECKOUT.ADDRESS.STATE' | translate"
+              appendTo="body"
+              class="typeahead"
+              [notFoundText]="notFoundText"
+            >
+            </ng-select>
+          </ion-item>
+          <span class="error" *ngIf="secondFormGroup.controls.state.errors && secondFormGroup.controls.state.touched">{{
+            'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate
+          }}</span>
+        </ion-col>
+        <ion-col class="form-group" size-lg="6" size-md="6" size-sm="12">
+          <ion-item>
+            <ion-label position="floating">
+              {{ 'USER.CHECKOUT.ADDRESS.HOUSE_NUMBER_AND_STREET_NAME' | translate }}
+            </ion-label>
+            <ion-input formControlName="address_line_1" autocomplete="on" name="address_line_1"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="secondFormGroup.controls.address_line_1.touched && secondFormGroup.controls.address_line_1.errors?.required">
+            {{ 'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate }}
+          </span>
+          <span class="error" *ngIf="secondFormGroup.controls.address_line_1.errors?.pattern">
+            {{ 'USER.CHECKOUT.ADDRESS.STREET_NUMBER_ERROR' | translate }}
+          </span>
+        </ion-col>
+        <ion-col class="form-group" size-lg="6" size-md="6" size-sm="12">
+          <ion-item>
+            <ion-label position="floating">
+              {{ 'USER.CHECKOUT.ADDRESS.APARTMENT_SUITE_UNIT_ETC' | translate }}
+            </ion-label>
+            <ion-input formControlName="address_line_2" autocomplete="on" name="address_line_2"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col class="form-group" size-lg="6" size-md="6" size-sm="12">
+          <ion-item>
+            <ion-label position="floating"> {{ 'USER.CHECKOUT.ADDRESS.TOWN_CITY' | translate }} </ion-label>
+            <ion-input formControlName="town" autocomplete="on" name="town"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="secondFormGroup.controls.town.errors && secondFormGroup.controls.town.touched">{{ 'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate }}</span>
+        </ion-col>
+        <ion-col class="form-group" size-lg="6" size-md="6" size-sm="12">
+          <ion-item>
+            <ion-label position="floating"> {{ 'USER.CHECKOUT.ADDRESS.Postcode_ZIP' | translate }} </ion-label>
+            <ion-input (keypress)="checkinput($event)" maxlength="10" formControlName="postal_code" autocomplete="on" name="postal_code"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="secondFormGroup.controls.postal_code.errors && secondFormGroup.controls.postal_code.touched">{{
+            'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate
+          }}</span>
+        </ion-col>
+      </ion-row>
+      <div class="row">
+        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+          {{ 'USER.CHECKOUT.ADDRESS.PREVIOUS' | translate }}
+        </button>
+        <button mat-raised-button matStepperNext color="primary" [disabled]="secondFormGroup.invalid" (click)="onSubmit(secondFormGroup)">
+          {{ 'USER.CHECKOUT.ADDRESS.NEXT' | translate }}
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup" [label]="'USER.CHECKOUT.ADDRESS.FILL_IN_YOUR_CONTACT_INFORMATION' | translate">
+    <form [formGroup]="thirdFormGroup">
+      <ion-col class="form-group" size="12">
+        <ion-item class="alignheading intl-tel-input">
+          <mat-form-field appearance="standard">
+            <mat-label>{{ 'USER.CHECKOUT.ADDRESS.PHONE' | translate }}</mat-label>
+            <ngx-mat-intl-tel-input
+              [enablePlaceholder]="true"
+              [enableSearch]="true"
+              [preferredCountries]="preferredCountries"
+              [cssClass]="'custom'"
+              formControlName="phone"
+              #phone
+              class="form-control"
+              container="body"
+              appendTo="body"
+            >
+            </ngx-mat-intl-tel-input>
+          </mat-form-field>
+        </ion-item>
+        <span
+          style="padding: 0px 0px 0px 10px"
+          class="error align"
+          *ngIf="!thirdFormGroup.controls.phone.errors?.required && thirdFormGroup.controls['phone'].touched && thirdFormGroup.controls['phone'].invalid"
+          >{{ 'USER.CHECKOUT.ADDRESS.INVALID_PHONE' | translate }}</span
+        >
+        <span class="error align" *ngIf="thirdFormGroup.controls.phone.errors?.required && thirdFormGroup.controls.phone.touched">{{
+          'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate
+        }}</span>
+      </ion-col>
+      <ion-col class="form-group" size="12" style="z-index: 0 !important">
+        <ion-item class="alignheading">
+          <ion-label position="floating"> {{ 'CHECKOUT.ADDRESS.EMAIL' | translate }}</ion-label>
+          <ion-input inputmode="email" formControlName="email" autocomplete="on" name="email"></ion-input>
+        </ion-item>
+        <span class="error align" *ngIf="thirdFormGroup.controls.email.errors?.required && thirdFormGroup.controls.email.touched">{{
+          'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate
+        }}</span>
+        <span class="error align" *ngIf="thirdFormGroup.controls.email.errors?.email && thirdFormGroup.controls.email.touched">{{
+          'USER.CHECKOUT.ADDRESS.INVALID_EMAIL' | translate
+        }}</span>
+      </ion-col>
+      <div class="row">
+        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+          {{ 'USER.CHECKOUT.ADDRESS.PREVIOUS' | translate }}
+        </button>
+        <button mat-raised-button matStepperNext color="primary" [disabled]="thirdFormGroup.invalid" (click)="onSubmit(thirdFormGroup)">
+          {{ 'USER.CHECKOUT.ADDRESS.NEXT' | translate }}
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step class="stripe-form" [completed]="isOrderPlaced">
+    <ng-template matStepLabel>{{ 'USER.CHECKOUT.ADDRESS.PAYMENT' | translate }}</ng-template>
+    <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions" containerClass="stripe-form-container" (change)="stripeCardChange($event)"> </ngx-stripe-card>
+    <div class="row">
+      <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+        {{ 'USER.CHECKOUT.ADDRESS.PREVIOUS' | translate }}
+      </button>
+      <button mat-raised-button type="button" color="primary" (click)="createToken(stepper)" [disabled]="!isStripeFormCompleted || submitted">
+        {{ 'USER.CHECKOUT.ADDRESS.PLACE_YOUR_ORDER' | translate }}
+      </button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>{{ 'USER.CHECKOUT.SHIPPING' | translate }}</ng-template>
+
+    <div class="shipping-wrapper">
+      <mat-spinner *ngIf="shipmentLoading"></mat-spinner>
+      <div class="shipping-carriers-container" *ngIf="shipment && shipment.rates && !shipmentLoading">
+        <div class="shipping-title">
+          <img src="assets/icon/shipping/shipping.svg" alt="" />
+          {{ 'USER.CHECKOUT.SELECT_RATE' | translate }}
+        </div>
+        <div *ngFor="let rate of shipmentLoading ? [] : (shipment.rates | sort: 'rate'); let i = index" class="shipping-carrier">
+          <img [src]="getCarrierLogo(rate.carrier)" alt="" class="{{ rate.carrier }}" />
+          <div>
+            <span>{{ 'USER.CHECKOUT.CARRIER' | translate }} :</span> {{ rate.carrier }}
+          </div>
+          <div>
+            <span>{{ 'USER.CHECKOUT.RATE' | translate }} :</span> {{ rate.rate }} {{ rate.currency }}
+          </div>
+          <div>
+            <span>{{ 'USER.CHECKOUT.DELIVERY_DAYS' | translate }} :</span> {{ rate.delivery_days || 90 }}
+          </div>
+          <span class="spacer"></span>
+          <mat-slide-toggle [checked]="rate.selected" (change)="rateToggleChange($event, rate, i)"> </mat-slide-toggle>
+        </div>
+        <div class="shipping-carrier-error" *ngIf="shippingRatesError">
+          {{ shippingRatesError | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button mat-raised-button type="button" color="primary" [disabled]="selectedRate === null || shipmentLoading" (click)="buyShipment()">
+        {{ 'USER.CHECKOUT.SUBMIT' | translate }}
+      </button>
+    </div>
+  </mat-step>
+</mat-stepper>

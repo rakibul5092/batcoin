@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsMyComponent",
+  "title": "My Component Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the Service.",
+      "type": "string",
+      "x-prompt": "What is The Service Name?"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the Service.",
+      "visible": false,
+      "x-prompt": "What is The Service Path?"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  },
+  "required": ["name", "path"]
+}

@@ -1,0 +1,52 @@
+<form #queryForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(form)">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-lg="8" size-xl="10">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'USER.CONTACT_US.QUERY_FORM.NAME' | translate }}</mat-label>
+          <input matInput trimFieldValue [placeholder]="'USER.CONTACT_US.QUERY_FORM.PLACEHOLDER.NAME' | translate" formControlName="name" autocomplete="on" name="name" />
+          <mat-error>{{ 'USER.CONTACT_US.QUERY_FORM.REQUIRED_FIELD' | translate }}</mat-error>
+        </mat-form-field>
+      </ion-col>
+      <ion-col size="12" size-lg="8" size-xl="10">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'USER.CONTACT_US.QUERY_FORM.EMAIL' | translate }}</mat-label>
+          <input
+            matInput
+            trimFieldValue
+            [placeholder]="'USER.CONTACT_US.QUERY_FORM.PLACEHOLDER.EMAIL' | translate"
+            formControlName="email"
+            [errorStateMatcher]="matcher"
+            autocomplete="on"
+            name="email"
+          />
+          <mat-error *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')">
+            {{ 'USER.CONTACT_US.QUERY_FORM.VALID_EMAIL_ADDRESS' | translate }}
+          </mat-error>
+          <mat-error *ngIf="form.controls['email'].hasError('required')">{{ 'USER.CONTACT_US.QUERY_FORM.REQUIRED_FIELD' | translate }}</mat-error>
+        </mat-form-field>
+      </ion-col>
+      <ion-col size="12" size-lg="8" size-xl="10">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'USER.CONTACT_US.QUERY_FORM.SUBJECT' | translate }}</mat-label>
+          <input matInput trimFieldValue [placeholder]="'USER.CONTACT_US.QUERY_FORM.PLACEHOLDER.SUBJECT' | translate" formControlName="subject" autocomplete="on" name="subject" />
+          <mat-error>{{ 'USER.CONTACT_US.QUERY_FORM.REQUIRED_FIELD' | translate }}</mat-error>
+        </mat-form-field>
+      </ion-col>
+      <ion-col size="12" size-lg="8" size-xl="10">
+        <mat-form-field class="" appearance="outline">
+          <mat-label>{{ 'USER.CONTACT_US.QUERY_FORM.YOUR_MESSAGE' | translate }}</mat-label>
+          <textarea matInput trimFieldValue [placeholder]="'USER.CONTACT_US.QUERY_FORM.PLACEHOLDER.YOUR_MESSAGE' | translate" formControlName="message"></textarea>
+          <mat-error>{{ 'USER.CONTACT_US.QUERY_FORM.REQUIRED_FIELD' | translate }}</mat-error>
+        </mat-form-field>
+      </ion-col>
+      <ion-col size="12" size-lg="8" size-xl="10">
+        <div class="field">
+          <button mat-raised-button type="submit" expand="block" class="btn" [matTooltip]="disableTooltips ? null : ('USER.CONTACT_US.QUERY_FORM.SEND_CONTACT_QUERY' | translate)">
+            {{ 'USER.CONTACT_US.QUERY_FORM.SEND' | translate }}
+          </button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

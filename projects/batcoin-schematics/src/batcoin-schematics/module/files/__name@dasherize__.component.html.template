@@ -1,0 +1,13 @@
+<lib-ag-grid *ngIf="(<%=name%>$ | async) as <%=name%>"
+             [enableExport]="true"
+             [loading$]="loading$"
+             [title]="'<%= classify(name) %>'"
+             [rowData]="<%=name%>"
+             [columnDefs]="columnDefs"
+             [pagination]="true"
+             [showTrashButton]="true"
+             (refreshData)="getData()"
+             (pageChange)="pageChange($event)"
+             (addData)="addEditItem()"
+             (changeData)="toggleDeletedItems()"
+></lib-ag-grid>

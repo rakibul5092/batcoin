@@ -1,0 +1,27 @@
+<div class="flip-card">
+  <div class="flip-card-inner" [@cardFlip]="state">
+    <div class="flip-card-front">
+      <app-image-with-loading [image]="imgUrl.url" [progressiveImage]="imgUrl.urlProgressive"></app-image-with-loading>
+    </div>
+    <div class="flip-card-back">
+      <div class="flip-card-col">
+        <mat-slide-toggle [checked]="isMarked && markedLabel === 'imageUrl'" (change)="update('imageUrl', $event)" [disabled]="getDisabled('imageUrl')"
+          >Front Image?</mat-slide-toggle
+        >
+        <mat-slide-toggle [checked]="isMarked && markedLabel === 'backPath'" (change)="update('backPath', $event)" [disabled]="getDisabled('backPath')"
+          >Back Image?</mat-slide-toggle
+        >
+        <mat-slide-toggle [checked]="isMarked && markedLabel === 'active'" (change)="update('active', $event)" [disabled]="getDisabled('active')">Active? </mat-slide-toggle>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="img-status">
+  {{ getImageLabel() }}
+  <div class="icons">
+    <mat-icon (click)="deleteImage()" [matTooltip]="'ADMIN.PRODUCTS.FLIP_CARD.DELETE' | translate" *ngIf="deleteClickedCount === 0" class="icon-grey">delete</mat-icon>
+    <mat-icon (click)="deleteImage()" [matTooltip]="'ADMIN.PRODUCTS.FLIP_CARD.ARE_YOU_SURE' | translate" *ngIf="deleteClickedCount === 1" class="icon-grey glow">check</mat-icon>
+    <ion-spinner name="crescent" *ngIf="deleteClickedCount === 2"></ion-spinner>
+    <mat-icon [matTooltip]="'ADMIN.PRODUCTS.FLIP_CARD.MORE' | translate" (click)="cardClicked()">more_vert</mat-icon>
+  </div>
+</div>

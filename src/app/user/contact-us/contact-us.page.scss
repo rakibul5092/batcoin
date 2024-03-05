@@ -1,0 +1,81 @@
+ion-grid {
+  padding: 0;
+
+  ion-row {
+    display: flex;
+    align-items: stretch;
+  }
+
+  ion-col {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.card-image-wrapper {
+  .image-wrapper ::ng-deep img {
+    position: absolute !important;
+  }
+
+  ion-card {
+    border-radius: 0px;
+    max-width: 80%;
+    width: 100%;
+
+    ion-card-header {
+      padding: 20px 30px 15px;
+
+      ion-card-title {
+        color: var(--ion-text-color);
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.384615384615385em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      ion-card-subtitle {
+        color: var(--ion-text-color);
+        font-size: 13px;
+        line-height: 33px;
+        font-weight: 300;
+        margin-top: 0;
+      }
+
+      &:first-child {
+        padding-bottom: 0px;
+      }
+    }
+  }
+}
+
+.query-form-wrapper {
+  background-color: #e3e3e3;
+}
+
+@media screen and (max-width: 991px) {
+  .card-image-wrapper ion-card {
+    max-width: 350px;
+
+    ion-card-header {
+      padding: 20px 20px 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  ion-grid {
+    ion-row {
+      height: auto;
+    }
+
+    ion-col.card-image-wrapper {
+      min-height: 50%;
+      height: auto;
+    }
+  }
+}

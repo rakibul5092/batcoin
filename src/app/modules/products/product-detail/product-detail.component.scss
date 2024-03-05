@@ -1,0 +1,325 @@
+::ng-deep .product-detail .mat-card-header-text {
+  margin: 0 0 10px;
+}
+
+.editfields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.imgs-count-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+mat-form-field,
+.half-width-field-wrapper {
+  flex: calc(50% - 12px) 1;
+}
+
+.full-width-field-wrapper {
+  width: 100%;
+  min-width: 100%;
+}
+
+.full-width-field-wrapper mat-form-field {
+  width: 100%;
+  margin-left: 0 !important;
+}
+
+.parcel-details mat-form-field {
+  width: 100%;
+  margin-left: 0 !important;
+}
+
+.parcel-details ion-col {
+  padding-left: 0;
+  padding-right: 24px;
+}
+
+.parcel-details ion-col:last-child {
+  padding-right: 0;
+}
+
+form {
+  position: relative;
+}
+
+.tab-box {
+  margin: 5px 0 20px;
+
+  .delete-all {
+    margin-left: 1rem;
+  }
+}
+
+.image-upload-section {
+  position: sticky;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: #fff;
+}
+
+.image-upload-section.stuck {
+  animation: slide-from-top 0.6s;
+  padding-top: 13px; //Plus the 1px to make title box interset
+  padding-bottom: 12px;
+  align-items: center;
+}
+@keyframes slide-from-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.image-upload-section {
+  h2 {
+    margin: 0 !important;
+  }
+}
+
+.overview-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 25px;
+
+  ion-label,
+  ion-input {
+    font-family: var(--ion-secondary-font-family);
+  }
+
+  .heading-label {
+    font-size: 20px;
+  }
+
+  .btn-next {
+    margin-top: 15px;
+    width: 20%;
+    min-width: auto;
+  }
+
+  .remove-button {
+    color: #fff;
+    height: 45px;
+    background-color: #ff0000;
+    min-width: auto;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+}
+
+.personal-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: fit-content;
+  overflow: hidden;
+
+  .remove-button {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    top: -100%;
+    right: 5%;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+
+  mat-form-field {
+    max-width: 60%;
+  }
+
+  app-file-upload.uploaded-image {
+    margin-left: auto;
+    margin-right: 15px;
+  }
+
+  .btn-delete {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: red;
+    position: relative;
+    top: 10px;
+    border-radius: 4px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .btn-delete mat-icon {
+    height: auto;
+    width: auto;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  app-flip-card {
+    // border: 1px solid #ccc;
+    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.edit-form {
+  position: relative;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.editfields {
+  padding-left: 23px;
+  padding-right: 23px;
+}
+
+.purple {
+  color: purple;
+  font-weight: bold;
+}
+
+mat-dialog-actions {
+  button {
+    width: 30%;
+    max-width: 200px;
+
+    mat-icon {
+      display: none;
+    }
+  }
+
+  button:first-child {
+    margin-right: 80px;
+  }
+}
+
+:host ::ng-deep {
+  .small-screen {
+    font-size: 28px;
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  mat-form-field {
+    width: 100% !important;
+  }
+  .parcel-details ion-col {
+    padding-right: 0;
+  }
+
+  .tab-box .title-box {
+    align-items: center;
+  }
+
+  .grid {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .personal-link {
+    max-width: auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .parcel-details mat-form-field {
+    width: 100% !important;
+  }
+  mat-dialog-actions {
+    button {
+      width: auto;
+      margin-left: 15px !important;
+      margin-right: 15px !important;
+    }
+  }
+}
+
+@media screen and (min-width: 550px) and (max-width: 799px) {
+  .parcel-details ion-col {
+    padding-right: 0;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 990px) {
+  .parcel-details ion-col {
+    padding-right: 0;
+  }
+
+  .parcel-details ion-col:nth-child(odd) {
+    padding-right: 24px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .editfields {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .image-upload-section {
+    h2 {
+      font-size: 16px;
+    }
+  }
+
+  .close-button-container {
+    h2 {
+      font-size: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 300px) {
+  mat-dialog-actions {
+    justify-content: space-around !important;
+
+    button {
+      width: auto;
+      max-width: auto;
+      min-width: auto;
+      padding: 5px;
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+
+      span {
+        display: none;
+      }
+
+      mat-icon {
+        display: block;
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+import {  NgModule } from '@angular/core';
+import {  CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule, Routes} from "@angular/router";
+
+import { IonicModule } from '@ionic/angular';
+
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatTableModule } from "@angular/material/table";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { DragDropModule } from "@angular/cdk/drag-drop";
+
+import { NextsapienComponentLibModule } from "nextsapien-component-lib";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { SharedModule } from "src/app/shared/shared.module";
+import {AgGridModule} from "src/app/shared/ag-grid/ag-grid.module";
+
+import { <%= classify(name) %>Component } from './<%=name%>.component';
+import { <%= classify(name) %>DetailComponent } from './detail-component/<%=name%>-detail.component';
+
+
+const routes: Routes = [
+  { path: '', component: <%= classify(name) %>Component },
+  { path: "**", redirectTo: "", pathMatch: 'full' }
+];
+
+
+
+@NgModule({
+  declarations: [
+    <%= classify(name) %>Component,
+    <%= classify(name) %>DetailComponent
+  ],
+  imports: [
+    CommonModule,
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forChild(routes),
+
+        NgSelectModule,
+        DragDropModule,
+
+        MatButtonModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatIconModule,
+        MatInputModule,
+        MatMenuModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+
+        SharedModule,
+        NextsapienComponentLibModule,
+        AgGridModule
+  ]
+})
+export class <%= classify(name) %>Module { }

@@ -1,0 +1,305 @@
+.table-wrapper {
+  overflow-x: auto;
+  overscroll-behavior-x: auto;
+  touch-action: pan-x;
+}
+
+.clear-cart {
+  float: right;
+}
+
+.table {
+  text-align: left;
+  background-color: transparent;
+
+  th {
+    padding: 13px 10px;
+    font-size: 14px;
+    line-height: 1.571428571428571em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-family: var(--ion-secondary-font-family);
+    min-width: 100px;
+    color: #000;
+    text-align: center;
+
+    &:first-child {
+      padding: 13px 0;
+      min-width: 40px;
+    }
+  }
+}
+
+.actions-wrapper {
+  width: 100%;
+  justify-content: flex-end;
+  margin-top: 10px;
+
+  ion-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 0;
+    font-family: var(--ion-secondary-font-family);
+    margin: 10px 0;
+
+    ion-input {
+      background: #fff;
+      font-size: 13.33px;
+      font-weight: 400;
+      color: #000;
+      margin-right: 10%;
+    }
+  }
+}
+
+.cart-options-wrapper {
+  margin-top: 5%;
+
+  ion-row {
+    justify-content: space-between;
+
+    h5 {
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      color: var(--ion-text-color);
+      letter-spacing: 1.6px;
+    }
+
+    .header-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .value {
+        text-align: right;
+        color: #909090;
+        text-align-last: center;
+      }
+    }
+
+    .d-flex-wrapper {
+      display: flex;
+
+      ion-icon {
+        font-weight: 800;
+        font-size: 20px;
+        margin-left: 5%;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+
+        &.rotate {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
+
+app-address-form {
+  display: block;
+  overflow: hidden;
+  opacity: 1 !important;
+}
+
+@media screen and (max-width: 667px) {
+  .actions-wrapper {
+    ion-col {
+      flex-direction: column;
+      margin: 0;
+
+      ion-input,
+      button {
+        width: 100% !important;
+        margin-top: 10px;
+        line-height: 1;
+        min-height: unset;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+tr {
+  td {
+    vertical-align: middle;
+    padding: 5px 10px;
+    color: #222;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 26px;
+    text-transform: capitalize;
+    border: 0;
+    text-align: center;
+
+    div {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+
+      p {
+        width: 100px;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: unset;
+      }
+    }
+
+    a {
+      font-weight: 600;
+    }
+
+    ion-icon {
+      cursor: pointer;
+    }
+
+    ion-thumbnail {
+      width: 70px;
+      height: auto;
+    }
+
+    ion-item {
+      max-width: 100px;
+
+      ion-input {
+        color: var(--table-font-color);
+      }
+
+      &::part(native) {
+        background-color: transparent;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:first-child {
+      padding: 5px 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}
+
+.delete-btn {
+  margin: 0 10px;
+  color: grey;
+}
+
+.cat-total {
+  border: 1px solid #d1c7c7;
+  padding: 20px;
+  margin: 0 10px;
+  margin-top: 50px;
+  box-shadow: 0 15px 10px -15px #111;
+
+  h5 {
+    font-weight: bold;
+    border-bottom: 1px solid #d1c7c7;
+    padding: 0 0 15px 0;
+    font-size: 18px;
+    margin-bottom: 25px;
+
+    ion-icon {
+      font-size: 30px;
+      margin-bottom: -5px;
+    }
+  }
+
+  div {
+    margin-bottom: 15px;
+
+    span {
+      position: relative;
+      margin-right: 10px;
+    }
+  }
+
+  button {
+    background: var(--ion-color-primary, #3880ff) !important;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    margin-top: 40px;
+    font-size: 16px;
+  }
+}
+
+.total-price,
+.sub-total-price {
+  font-weight: bold;
+  padding: 5px;
+}
+
+.mat-header-row {
+  border-bottom: 2px solid #d1c7c7 !important;
+}
+
+.empty-cart-message {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: #ffffff;
+  padding: 25px;
+  font-weight: 400;
+
+  &-text {
+    color: #040404;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    font-size: 24px;
+  }
+
+  &-sorry {
+    padding: 10px;
+    padding-left: 20px;
+    border-left: 4px solid #040404;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0;
+      line-height: 2;
+    }
+  }
+
+  .btn {
+    margin-top: 20px;
+    width: auto;
+    color: #ffff;
+    background-color: #3f51b5;
+    border: 0px;
+    display: flex;
+    justify-content: center;
+
+    span {
+      align-self: center;
+    }
+
+    .icon {
+      margin-left: 10px;
+    }
+  }
+}
+
+::ng-deep app-image-with-loading.cart-images img {
+  display: block;
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: contain !important;
+}
+
+tr {
+  height: 120px !important;
+}

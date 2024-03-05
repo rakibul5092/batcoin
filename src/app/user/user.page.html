@@ -1,0 +1,17 @@
+<ion-app>
+  <app-menu [contentId]="'main-content'" [menuItems]="translatedMenuItems" [logo]="cmsSettings?.logo"></app-menu>
+
+  <div class="extra-icons-wrapper">
+    <div class="extra-icon">
+      <a routerLink="/cart" [matTooltip]="disableTooltips ? ('USER.HOME.CART' | translate): 'USER.HOME.VIEW_CART' | translate">
+        <ion-icon name="cart-outline"></ion-icon>
+        <span class="extra-icon_text" *ngIf="noOfItems > 0"> {{ noOfItems }} </span>
+      </a>
+    </div>
+    <div class="extra-icon">
+      <lib-language-toggler></lib-language-toggler>
+    </div>
+  </div>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

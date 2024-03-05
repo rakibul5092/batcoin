@@ -1,0 +1,106 @@
+import { Component, OnDestroy } from '@angular/core';
+
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+
+import { Store, select } from '@ngrx/store';
+import { fromPaginator, SNACKBARTYPE, SocketService } from 'nextsapien-component-lib';
+
+import { <%= classify(name) %>DetailComponent } from './detail-component/<%=name%>-detail.component';
+import { <%= classify(name) %> } from "./<%=name%>.model";
+import { <%= classify(name) %>Service } from './<%=name%>.service';
+import { AgGridService } from "src/app/shared/ag-grid/ag-grid.service";
+import { SharedService } from 'src/app/shared/shared.service';
+
+@Component({
+  selector: 'app-<%=name%>',
+  templateUrl: './<%=name%>.component.html',
+  styleUrls: ['./<%=name%>.component.scss']
+})
+export class <%= classify(name) %>Component implements OnDestroy {
+    public <%=name%>: <%=classify(name)%>[] = [];
+    public columnDefs: any[] = this.<%=name%>Service.constructColumnDefs(this);
+    public showDeletedItems: boolean = false;
+    public <%=name%>$: Observable<<%= classify(name) %>[]>;
+    public loading$: Observable<boolean>;
+    private _unsubscribeAll: Subject<any>;
+
+    constructor(
+      private <%=name%>Service: <%= classify(name) %>Service,
+      private agGridService: AgGridService,
+      private sharedService: SharedService,
+      private store: Store<fromPaginator.State>,
+      private socket: SocketService,
+    ) {
+      this._unsubscribeAll = new Subject();
+      <%=name%>Service.entities$.subscribe((value: any[]) =>
+      this.<%=name%> = this.showDeletedItems ?
+        value.filter(item => item.isDeleted): value);
+
+      this.loading$ = <%=name%>Service.loading$;
+
+      this.onModuleChanges();
+    }
+
+    ionViewWillEnter = () => this.getData();
+
+    public pageChange = (event) => this.getData({}, '', event.pageSize, event.skip)
+
+    public getData(conditions: Object = {}, populate: string = '', limit: string = '10', skip: string = '0') {
+      conditions = {'isDeleted': this.showDeletedItems};
+      this.<%=name%>Service.clearCache();
+      this.<%=name%>Service.getWithPopulatedFields(conditions, populate, limit, skip, "-created_at");
+    }
+
+    public addEditItem(item: any = {}) {
+      this.agGridService.afterDialogClosed(<%= classify(name) %>DetailComponent, item).subscribe(<%=name%> => {
+        if (<%=name%>) {
+          this.showDeletedItems = false;
+          if (<%=name%>._id) { // Update the <%=name%>
+            this.<%=name%>Service.update(<%=name%>).subscribe(() => this.sharedService.openSnackBar('Updated a new <%=name%>', '', SNACKBARTYPE.success));
+          } else { // Save the <%=name%>
+            this.<%=name%>Service.add(<%=name%>).subscribe(() =>  this.sharedService.openSnackBar('Added a new <%=name%>', '', SNACKBARTYPE.success));
+          }
+        }
+      });
+    }
+
+
+    public toggleDeletedItems() {
+      this.showDeletedItems = !this.showDeletedItems;
+      this.getData();
+    }
+
+    public delete(<%=name%>: <%= classify(name) %>) {
+      this.<%=name%>Service.delete(<%=name%>).subscribe(() => {
+        this.sharedService.openSnackBar("Deleted the <%=name%>", '', SNACKBARTYPE.error);
+      });
+    }
+
+    public restore = (<%=name%>: <%= classify(name) %>) => this.<%=name%>Service.update({ ...<%=name%>, isDeleted: false })
+        .subscribe(() => this.sharedService.openSnackBar("Restored the Product", '', SNACKBARTYPE.success));
+
+    public onRowActionClick(action, row, rowIndex): void {
+      switch (action) {
+        case 'edit': this.addEditItem(row); break;
+        case 'restore': this.restore(row); break;
+        case 'delete': this.delete(row); break;
+        case 'permanentlyDelete': this.delete(row); break;
+      }
+    }
+
+   private onModuleChanges(): void{
+    this.socket.moduleChange
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(change => {
+        if(change.module === '<%=name%>'){
+          this.getData();
+        }
+      })
+  }
+    ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+  }
+
+}

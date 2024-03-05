@@ -1,0 +1,72 @@
+<ion-app>
+  <app-menu [contentId]="'main-content'" [menuItems]="translatedMenuItems" [logo]="cmsSettings?.logo"></app-menu>
+  <div class="extra-icons-wrapper">
+    <div class="extra-icon">
+      <button
+        class="icon-button"
+        mat-icon-button
+        [matMenuTriggerFor]="notification"
+        #notifyTrigger="matMenuTrigger"
+        [matTooltip]="'ADMIN.NOTIFICATIONS' | translate"
+        aria-label="Notification options"
+      >
+        <mat-icon>{{notifyTrigger.menuOpen ?'notifications' : 'notifications_none'}}</mat-icon>
+        <ng-container *ngIf="counts$ | async as counts">
+          <span class="extra-icon_text" *ngIf="counts.notifications"> {{ counts.notifications }} </span>
+        </ng-container>
+      </button>
+      <mat-menu #notification="matMenu" (closed)="updateViewedStatus()">
+        <ng-container *ngIf="messages$ | async as messages;">
+          <ng-container *ngIf="messages.length > 0; else noNewMessages">
+            <h2 class="message-head p-15">{{"ADMIN.NEW" | translate}}</h2>
+            <app-notification-list-item
+              [messages]="messages"
+              [isEarlier]="false"
+              (deleted)="deleteNotification($event)"
+              (read)="markAsRead($event)"
+              (opened)="openNotification($event)"
+            >
+            </app-notification-list-item>
+            <mat-divider class="mx-15"></mat-divider>
+            <h2 class="message-head pl-15 pr-15">{{"ADMIN.EARLIER" | translate}}</h2>
+            <app-notification-list-item
+              [messages]="messages"
+              [isEarlier]="true"
+              (deleted)="deleteNotification($event)"
+              (read)="markAsRead($event)"
+              (opened)="openNotification($event)"
+            ></app-notification-list-item>
+          </ng-container>
+
+          <ng-template #noNewMessages>
+            <button mat-menu-item disabled class="no-new-notification">
+              <span>{{"ADMIN.NO_NEW_NOTIFICATIONS" | translate}}</span>
+            </button>
+          </ng-template>
+        </ng-container>
+        <div class="px-15 pb-15">
+          <button class="see-all" mat-menu-item [routerLink]="['/admin', 'messages']">
+            <span>{{"ADMIN.SEE_ALL_NOTIFICATIONS" | translate}}</span>
+          </button>
+        </div>
+      </mat-menu>
+    </div>
+    <div class="extra-icon">
+      <button class="icon-button" mat-icon-button [matMenuTriggerFor]="profile" [matTooltip]="'ADMIN.PROFILE' | translate" aria-label="Profile options">
+        <mat-icon>person</mat-icon>
+      </button>
+      <mat-menu #profile="matMenu">
+        <div mat-menu-item>Hi, {{ user.first_name + ' ' + user.last_name}}</div>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>{{"ADMIN.LOGOUT" | translate}}</span>
+        </button>
+      </mat-menu>
+    </div>
+    <div class="extra-icon">
+      <lib-language-toggler></lib-language-toggler>
+    </div>
+  </div>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

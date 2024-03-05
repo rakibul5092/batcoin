@@ -1,0 +1,29 @@
+::ng-deep .product-detail .mat-card-header-text {
+  margin: 0 0 10px;
+}
+mat-form-field {
+  width: 100% !important;
+}
+
+.indent {
+  padding-left: 0.8rem;
+}
+
+section {
+  margin-top: 1.6rem;
+  border-bottom: 1px dotted lightgray;
+  &:first-child {
+    margin-top: 0;
+  }
+
+  h4 {
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin: 5px;
+    margin-top: 0;
+  }
+}

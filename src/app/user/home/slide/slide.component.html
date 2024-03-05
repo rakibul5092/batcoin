@@ -1,0 +1,31 @@
+<ion-grid class="container">
+  <ion-row *ngIf="slideData && !loading">
+    <ion-col size="12" size-md="6" class="image-text-wrapper">
+      <div class="image-wrapper">
+        <app-image-with-loading [image]="slideData.backPath"></app-image-with-loading>
+      </div>
+      <div class="coin-img" [routerLink]="['/product', slideData.slug]">
+        <app-image-with-loading [image]="slideData.imageUrl"></app-image-with-loading>
+      </div>
+      <div class="edge-blur"></div>
+    </ion-col>
+    <ion-col size="12" size-md="6" class="text-wrapper">
+      <h4 class="">{{ (slideData.category | dynamicTranslate) ? (slideData.category | dynamicTranslate) : slideData.category }}</h4>
+      <h2 class="">{{ slideData.title | dynamicTranslate }}</h2>
+      <h3 class="">{{ slideData.subTitle | dynamicTranslate }}</h3>
+      <button class="btn" (click)="addToCart()">
+        {{ 'USER.HOME.ADD_TO_CART' | translate }}<span class="divider"></span><span>${{ slideData.currentPrice }}</span>
+      </button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="loading">
+    <ion-col size="12" size-md="6" class="text-wrapper">
+      <p-skeleton width="400px" height="300px"></p-skeleton>
+    </ion-col>
+    <ion-col size="12" size-md="6" class="text-wrapper">
+      <p-skeleton width="400px" height="1rem" class="skeleton-line" *ngFor="let i of [1, 2, 3]"></p-skeleton>
+      <p-skeleton width="200px" height="4rem"></p-skeleton>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,31 @@
+<ion-content>
+  <ion-grid class="container">
+    <ion-row class="">
+      <ion-col size-md="6" size="12" class="ion-padding card-image-wrapper">
+        <div class="image-wrapper">
+          <app-image-with-loading [image]="'assets/images/WhatsApp-Image-2020-12-15-at-9.27.33-PM.jpeg'" [localImage]="true"></app-image-with-loading>
+        </div>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ cmsSettings?.name}}</ion-card-title>
+            <ion-card-subtitle>{{ cmsSettings?.tagline}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-header>
+            <ion-card-title>{{'USER.CONTACT_US.ADDRESS' | translate}}</ion-card-title>
+            <ion-card-subtitle
+              >{{ cmsSettings?.name}}
+              <br />
+              {{ cmsSettings?.contact_us.address}}
+              <br />
+              {{ constructAddress() || ('USER.CONTACT_US.ADDRESS_CITY' | translate)}}</ion-card-subtitle
+            >
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size-md="6" size="12" class="ion-text-center ion-padding query-form-wrapper">
+        <app-query-form></app-query-form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

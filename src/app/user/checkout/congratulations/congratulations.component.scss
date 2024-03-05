@@ -1,0 +1,134 @@
+p {
+  font-family: var(--secondary-font-family);
+  font-size: 13px;
+  line-height: 33px;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+}
+
+.content-wrappper {
+  .font-weight-bold {
+    font-weight: 500;
+  }
+  h4 {
+    color: orange;
+    font-size: 18px;
+  }
+  p {
+    font-size: 16px;
+  }
+}
+
+.order-info-wrappper {
+  ion-col {
+    padding: 0;
+  }
+
+  .form-heading {
+    font-size: 17px;
+    text-transform: uppercase;
+    margin: 20px 0;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .form-heading-wrapper {
+    &::part(native) {
+      background-color: transparent;
+      padding-left: 0;
+    }
+  }
+
+  button {
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 10px;
+  }
+
+  .header-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
+    p {
+      width: 50%;
+      padding: 13px 10px;
+    }
+
+    .value {
+      color: #909090;
+      text-align-last: center;
+    }
+
+    .header {
+      font-weight: 600;
+      color: #000;
+    }
+
+    &.white-border {
+      p {
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        line-height: 1.571428571428571em;
+        font-size: 14px;
+      }
+    }
+
+    &.product-heading .header {
+      color: var(--table-font-color);
+      font-weight: 300;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.order-info-container-shipment {
+  background: #fff;
+  box-shadow: 0 15px 10px -15px #111;
+}
+
+.order-info-container {
+  padding: 10px;
+  margin-bottom: 15px;
+
+  .shipment-col {
+    border-left: 1px solid #e3e3e3;
+
+    div {
+      padding: 10px;
+      .header {
+        font-weight: 600;
+        margin-right: 15px;
+      }
+
+      .postage_label {
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        max-width: 300px;
+      }
+
+      .trackerIcon {
+        width: 30px;
+        margin: 0 10px -10px 0;
+      }
+    }
+  }
+}
+
+.print-container {
+  text-align: center;
+
+  .mat-raised-button {
+    border-radius: 30px;
+    margin: 30px auto;
+    padding: 0 25px;
+
+    img {
+      width: 20px;
+    }
+  }
+}

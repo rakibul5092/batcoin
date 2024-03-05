@@ -1,0 +1,120 @@
+<ion-content>
+  <ion-grid class="container">
+    <ion-row class="row-min-height ion-justify-content-around">
+      <ion-col size="12" size-lg="10" class="ion-padding">
+        <app-title [content]="'USER.CART.CART' | translate"></app-title>
+        <ion-row *ngIf="cart.items && cart.items.length > 0">
+          <ion-col size="12" size-sm="12">
+            <button mat-raised-button (click)="emptyCart()" color="warn" style="float: right">{{'USER.CART.CLEAR_CART' | translate}}</button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" size-sm="12">
+            <div class="cart-wrapper" *ngIf="cart.items && cart.items.length > 0">
+              <div class="table-wrapper">
+                <table mat-table [dataSource]="dataSource" class="table">
+                  <!-- Product Image Column -->
+                  <ng-container matColumnDef="productImage">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                      <ion-thumbnail style="position: relative; display: block; margin: 0 auto">
+                        <app-image-with-loading class="cart-images" [image]="element.product.imageUrl"></app-image-with-loading>
+                      </ion-thumbnail>
+                    </td>
+                  </ng-container>
+
+                  <!-- Product Name Column -->
+                  <ng-container matColumnDef="productName">
+                    <th mat-header-cell *matHeaderCellDef>{{'USER.CART.PRODUCT' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">
+                      <a [routerLink]="['/product', element.product.slug]">{{ element.product.title |dynamicTranslate}}</a>
+                    </td>
+                  </ng-container>
+
+                  <!-- Price Column -->
+                  <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef>{{'USER.CART.PRICE' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{'$'+element.product.currentPrice}}</td>
+                  </ng-container>
+
+                  <!-- Quantity Column -->
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef>{{'USER.CART.QUANTITY' | translate}}</th>
+                    <td mat-cell *matCellDef="let element; let i = index;">
+                      <p-inputNumber
+                        [showButtons]="true"
+                        [size]="1"
+                        [min]="1"
+                        [max]="9999"
+                        [inputStyleClass]="element.quantity >= 1 ? 'p-inputNumber-input' : 'p-inputNumber-invalid-input'"
+                        buttonLayout="horizontal"
+                        spinnerMode="horizontal"
+                        decrementButtonClass="p-decrement-button"
+                        incrementButtonClass="p-increment-button"
+                        incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus"
+                        (onInput)="valueChanged(i, $event)"
+                        [(ngModel)]="element.quantity"
+                        [matTooltip]="element.quantity"
+                      ></p-inputNumber>
+                    </td>
+                  </ng-container>
+
+                  <!-- Subtotal Column -->
+                  <ng-container matColumnDef="subtotal">
+                    <th mat-header-cell *matHeaderCellDef>{{'USER.CART.SUBTOTAL' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">
+                      <div [matTooltip]="'$'+ (element.quantity * element.product.currentPrice | number:'1.2-2')">
+                        <p>${{ element.quantity * element.product.currentPrice | number:'1.2-2' }}</p>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <!-- Actions Column -->
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element; let i = index;">
+                      <button mat-icon-button class="delete-btn" [matTooltip]="'COMMON.DELETE' | translate" aria-label="deleteBtn" (click)="removeItem(i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="12" size-sm="12" size-md="4" *ngIf="cart && cart.items && cart.items.length > 0">
+            <div class="cat-total">
+              <h5><ion-icon name="cart-outline"></ion-icon>{{'USER.CART.CART_TOTALS' | translate}}</h5>
+              <div>
+                <span>{{'USER.CART.SUBTOTAL' | translate}}</span>
+                <span class="total-price">$ {{ cart.total_price | number:'1.2-2' }}</span>
+              </div>
+              <div>
+                <span>{{'USER.CART.TOTAL' | translate}}</span>
+                <span class="sub-total-price">$ {{ cart.total_price | number:'1.2-2' }}</span>
+              </div>
+              <button mat-raised-button (click)="goToCheckout()" color="primary">{{'USER.CART.PROCEED_TO_CHECKOUT' | translate}}</button>
+            </div>
+          </ion-col>
+        </ion-row>
+        <div class="cart-wrapper" *ngIf="!cart.items || cart.items.length < 1">
+          <div class="empty-cart-message">
+            <p class="empty-cart-message-text">{{'USER.CART.YOUR_CART_IS_CURRENTLY_EMPTY' | translate}}.</p>
+            <div class="empty-cart-message-sorry">
+              <p>{{'USER.CART.I_AM_SORRY' | translate}}, {{'USER.CART.NOTHING_HERE' | translate}}</p>
+            </div>
+            <p>{{'USER.CART.SHOPPING_CART_EMPTY' | translate}}</p>
+            <button type="submit" color="primary" (click)="goToList()" class="btn">
+              <span class="text">{{'USER.CART.RETURN_TO_SHOP' | translate}}</span>
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <app-footer [title]="cmsSettings?.name" [copyrightText]="cmsSettings?.copyright_text"></app-footer>
+  </ion-grid>
+</ion-content>

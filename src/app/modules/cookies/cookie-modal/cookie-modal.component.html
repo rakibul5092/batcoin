@@ -1,0 +1,5 @@
+<div class="cookieContainer" *ngIf="!closePopup">
+  <button mat-raised-button (click)="openCookieModal()">{{ 'COOKIE.POLICY' | translate }}</button>
+  <button mat-raised-button color="primary" (click)="acceptCookie()">{{ 'COOKIE.ACCEPT' | translate }}</button>
+  <button mat-raised-button color="primary" (click)="denyCookie()">{{ 'COOKIE.DENY' | translate }}</button>
+</div>

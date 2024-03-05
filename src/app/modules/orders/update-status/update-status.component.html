@@ -1,0 +1,33 @@
+<div class="title-box close-button-container">
+  <h2 mat-dialog-title class="tab-title">
+    {{ 'ADMIN.ORDERS.UPDATE_ORDER_STATUS' | translate }}
+  </h2>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dialogRef.close()"><span aria-hidden="true">&times;</span></button>
+</div>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" (ngSubmit)="saveStatus(form)">
+    <div class="editfields">
+      <div class="form-group typeahead-group">
+        <ng-select
+          [items]="statuses$ | async"
+          [typeahead]="statusInput$"
+          [loading]="statusLoading"
+          bindLabel="name"
+          formControlName="order_status"
+          [placeholder]="'ADMIN.ORDERS.ORDER_STATUS' | translate"
+          appendTo="body"
+          class=""
+          [notFoundText]="'NO_ORDER_STATUS_FOUND' | translate"
+        ></ng-select>
+      </div>
+    </div>
+    <div class="button-panel modal-controls">
+      <button mat-raised-button color="accent" type="button" (click)="close()" [matTooltip]="'ADMIN.ORDER_STATUS.CANCEL_ALL_CHANGES' | translate">
+        {{ 'ADMIN.ORDERS.CANCEL' | translate }}
+      </button>
+      <button mat-raised-button color="primary" type="submit" [matTooltip]="'ADMIN.ORDER_STATUS.SAVE_ALL_CHANGES' | translate" [disabled]="form.pristine || form.invalid">
+        {{ 'COMMON.SAVE' | translate }}
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

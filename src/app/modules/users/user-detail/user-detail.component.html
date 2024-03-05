@@ -1,0 +1,64 @@
+<div class="title-box close-button-container">
+  <h2 mat-dialog-title class="tab-title">{{ (editMode ? 'COMMON.EDIT' : 'COMMON.ADD') | translate }} {{ 'ADMIN.USERS.USER_DETAILS' | translate }}</h2>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dialogRef.close()"><span aria-hidden="true">&times;</span></button>
+</div>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" (ngSubmit)="saveUser(form)">
+    <div class="editfields">
+      <mat-form-field>
+        <mat-label>{{ 'ADMIN.USERS.FIRST_NAME' | translate }}</mat-label>
+        <input
+          matInput
+          trimFieldValue
+          formControlName="first_name"
+          [placeholder]="'ADMIN.USERS.FIRST_NAME' | translate"
+          #first_name
+          (keyup.esc)="close()"
+          (keyup.enter)="saveUser(form)"
+        />
+        <mat-error>( {{ 'ADMIN.USERS.FIRST_NAME_IS_REQUIRED_CHAR2' | translate }} )</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'ADMIN.USERS.LAST_NAME' | translate }}</mat-label>
+        <input
+          matInput
+          trimFieldValue
+          formControlName="last_name"
+          [placeholder]="'ADMIN.USERS.LAST_NAME' | translate"
+          #last_name
+          (keyup.esc)="close()"
+          (keyup.enter)="saveUser(form)"
+        />
+        <mat-error>( {{ 'ADMIN.USERS.LAST_NAME_IS_REQUIRED_CHAR2' | translate }} )</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'ADMIN.USERS.EMAIL' | translate }}</mat-label>
+        <input matInput formControlName="email" [placeholder]="'ADMIN.USERS.EMAIL' | translate" #email (keyup.esc)="close()" (keyup.enter)="saveUser(form)" />
+        <mat-error *ngIf="form.get('email').errors && !form.get('email').errors['emailAlreadyExists']">( {{ 'ADMIN.USERS.EMAIL_REQUIRED_AND_VALID' | translate }} )</mat-error>
+        <mat-error *ngIf="form.get('email').errors['emailAlreadyExists']">({{ 'ADMIN.USERS.EMAIL_TAKEN' | translate }})</mat-error>
+      </mat-form-field>
+      <div class="form-group typeahead-group">
+        <ng-select
+          [items]="roles$ | async"
+          [loading]="roleLoading"
+          bindLabel="name"
+          formControlName="role"
+          [placeholder]="'ADMIN.USERS.USER_ROLE' | translate"
+          appendTo="body"
+          class=""
+        ></ng-select>
+        <small [ngStyle]="{ visibility: form.get('role').invalid && (form.get('role').dirty || form.get('role').touched) ? '' : 'hidden' }" class="field-error"
+          >( {{ 'ADMIN.USERS.USER_MUST_HAVE_A_ROLE' | translate }} )</small
+        >
+      </div>
+    </div>
+    <div class="button-panel modal-controls">
+      <button mat-raised-button color="accent" type="button" (click)="close()" [matTooltip]="'ADMIN.USERS.CANCEL_ALL_CHANGES' | translate">
+        {{ 'ADMIN.USERS.CANCEL' | translate }}
+      </button>
+      <button mat-raised-button color="primary" type="submit" [matTooltip]="'ADMIN.USERS.SAVE_ALL_CHANGES' | translate">
+        {{ 'COMMON.SAVE' | translate }}
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

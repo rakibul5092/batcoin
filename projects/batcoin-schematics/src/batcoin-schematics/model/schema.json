@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsMyComponent",
+  "title": "My Model Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the Model.",
+      "type": "string",
+      "x-prompt": "What is The Model Name?"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the Model.",
+      "visible": false,
+      "x-prompt": "What is The Model Path?"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  },
+  "required": ["name", "path"]
+}

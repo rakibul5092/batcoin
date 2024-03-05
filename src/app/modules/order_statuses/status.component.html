@@ -1,0 +1,13 @@
+<lib-ag-grid
+  [enableExport]="true"
+  [loading$]="loading$"
+  [title]="'ADMIN.ORDER_STATUS.ORDER_STATUSES' | translate"
+  [rowData]="statuses"
+  [columnDefs]="columnDefs"
+  [pagination]="true"
+  [model]="model"
+  (refreshData)="getData()"
+  (pageChange)="pageChange($event)"
+  (addData)="addEditItem()"
+  (exportEvent)="onExport($event)"
+></lib-ag-grid>

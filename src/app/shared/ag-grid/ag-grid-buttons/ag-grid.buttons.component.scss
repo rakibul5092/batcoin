@@ -1,0 +1,16 @@
+.ag-grid-btn {
+  margin-top: -12px;
+}
+
+@media screen and (max-width: 450px) {
+  .ag-grid-btn {
+    &.mat-icon-button {
+      width: 24px;
+      height: 24px;
+    }
+
+    .material-icons {
+      font-size: 18px;
+    }
+  }
+}

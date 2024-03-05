@@ -1,0 +1,6 @@
+import {Model} from 'nextsapien-component-lib';
+
+export class <%= classify(name) %> implements Model{
+  _id: string = '';
+  urlName: string  = '<%=name%>';
+}

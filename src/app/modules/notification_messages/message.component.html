@@ -1,0 +1,18 @@
+<lib-ag-grid
+  *ngIf="messages$ | async as messages"
+  [enableExport]="true"
+  [disableAdd]="true"
+  [loading$]="loading$"
+  [title]="'ADMIN.NOTIFICATION_MESSAGE.MESSAGE' | translate"
+  [rowData]="messages"
+  [columnDefs]="columnDefs"
+  [pagination]="true"
+  [showTrashButton]="true"
+  [showDeletedItems]="showDeletedItems"
+  [model]="model"
+  (refreshData)="getData()"
+  (pageChange)="pageChange($event)"
+  (exportEvent)="onExport($event)"
+  (changeData)="toggleDeletedItems()"
+  [columnsHideStrategy]="columnsHideStrategy"
+></lib-ag-grid>

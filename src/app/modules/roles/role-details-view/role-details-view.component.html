@@ -1,0 +1,25 @@
+<div class="title-box close-button-container">
+  <h2 mat-dialog-title class="tab-title">
+    {{ 'ADMIN.ROLE.ROLE_DETAILS' | translate }}
+  </h2>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dialogRef.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="role-details-content">
+  <section>
+    <h4>{{ 'Name' }}:</h4>
+    <p class="indent">{{ data.name }}</p>
+  </section>
+
+  <section>
+    <h4>{{ 'Description' }}:</h4>
+    <p class="indent">{{ data.description }}</p>
+  </section>
+
+  <section>
+    <h4>{{ 'Active' }}:</h4>
+    <p class="indent">{{ data.active }}</p>
+  </section>
+</div>

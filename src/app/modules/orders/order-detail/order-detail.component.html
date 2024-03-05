@@ -1,0 +1,62 @@
+<div class="title-box close-button-container">
+  <h2 mat-dialog-title class="tab-title">
+    {{ 'ADMIN.ORDERS.VIEW_ORDER_DETAILS' | translate }}
+  </h2>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dialogRef.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <div class="indent">
+    <section>
+      <h4>{{ 'ADMIN.ORDERS.FIRST_NAME' | translate }}:</h4>
+      <p class="indent">{{ data.first_name }}</p>
+    </section>
+
+    <section>
+      <h4>{{ 'ADMIN.ORDERS.LAST_NAME' | translate }}:</h4>
+      <p class="indent">{{ data.last_name }}</p>
+    </section>
+
+    <section>
+      <h4>{{ 'ADMIN.ORDERS.ADDRESS_LINE_1' | translate }}:</h4>
+      <p class="indent">{{ data.address_line_1 }}</p>
+    </section>
+
+    <section *ngIf="data.address_line_2">
+      <h4>{{ 'ADMIN.ORDERS.ADDRESS_LINE_2' | translate }}:</h4>
+      <p class="indent">{{ data.address_line_2 }}</p>
+    </section>
+
+    <section *ngIf="data.prevPrice">
+      <h4>{{ 'ADMIN.ORDERS.TOWN' | translate }}:</h4>
+      <p class="indent">{{ data.town }}</p>
+    </section>
+
+    <section>
+      <h4>{{ 'ADMIN.ORDERS.STATE' | translate }}:</h4>
+      <p class="indent">{{ data.state }}</p>
+    </section>
+
+    <section *ngIf="data.prevPrice">
+      <h4>{{ 'ADMIN.ORDERS.POSTAL_CODE' | translate }}:</h4>
+      <p class="indent">{{ data.postal_code }}</p>
+    </section>
+
+    <section>
+      <h4>{{ 'ADMIN.ORDERS.EMAIL' | translate }}:</h4>
+      <p class="indent">{{ data.email }}</p>
+    </section>
+
+    <section *ngIf="data.prevPrice">
+      <h4>{{ 'ADMIN.ORDERS.PHONE' | translate }}:</h4>
+      <p class="indent">{{ data.phone }}</p>
+    </section>
+
+    <section>
+      <h4>{{ 'ADMIN.ORDERS.PRICE' | translate }}:</h4>
+      <p class="indent">{{ data.cart.total_price }}</p>
+    </section>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,151 @@
+ion-card {
+  cursor: pointer;
+  box-shadow: none;
+  border-radius: 0px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+
+  ion-thumbnail {
+    width: 100%;
+    position: relative;
+    object-fit: cover;
+    padding: 0;
+    height: auto;
+
+    div {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.onsale-wrapper {
+        background-color: #000;
+        color: #fff;
+        height: 65px;
+        width: 65px;
+        border-radius: 50%;
+        top: 5%;
+        left: 5%;
+        z-index: 10;
+
+        p {
+          position: relative;
+          text-align: center;
+          margin: 0;
+          text-transform: uppercase;
+
+          &::before {
+            content: '';
+            position: absolute;
+            width: 35%;
+            height: 2px;
+            top: 110%;
+            left: 50%;
+            background: #fff;
+            transform: translateX(-50%);
+          }
+        }
+      }
+
+      &.cart-wrapper {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        overflow: hidden;
+        z-index: 1;
+
+        a {
+          color: var(--ion-text-color);
+          font-size: 14px;
+          letter-spacing: 3px;
+          font-weight: 400;
+          text-transform: uppercase;
+          display: none;
+          z-index: 10;
+
+          &:hover {
+            color: #666363;
+          }
+        }
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: #eee;
+          opacity: 0.7;
+          top: 100%;
+          left: 0;
+          transition: all 0.5s ease;
+          z-index: 1;
+        }
+      }
+    }
+    app-image-with-loading.related-image {
+      padding: 10px 5px;
+      position: relative;
+      display: flex;
+
+      ::ng-deep img {
+        object-fit: contain;
+      }
+    }
+  }
+
+  ion-card-header {
+    padding: 20px 16px 0;
+    height: 75px;
+    margin-top: auto;
+
+    ion-card-title {
+      font-size: 18px;
+      line-height: 27px;
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
+
+  ion-card-content {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    height: 35px;
+    position: relative;
+    margin-top: 10px;
+    transform: translateX(16px);
+
+    .price-wrapper {
+      display: flex;
+      position: absolute;
+      left: 0%;
+      transition: all 0.5s ease;
+
+      .previous-price {
+        margin-right: 10px;
+        text-decoration: line-through;
+      }
+      .current-price {
+      }
+    }
+  }
+
+  &:hover ion-thumbnail .cart-wrapper {
+    a {
+      display: block;
+    }
+    &::before {
+      top: 0;
+    }
+  }
+}
+::ng-deep app-image-with-loading.related-image img {
+  display: block;
+  width: 260px !important;
+  height: 150px !important;
+  object-fit: contain !important;
+}

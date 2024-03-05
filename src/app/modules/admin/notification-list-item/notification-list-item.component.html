@@ -1,0 +1,53 @@
+<div
+  mat-menu-item
+  *ngFor="let notification of messages | viewStatus: isEarlier"
+  [ngClass]="{ 'notification-wrapper': true, 'order-notification': notification.order }"
+  (click)="openNotification(notification)"
+  style="padding-left: 25px; padding-right: 25px"
+>
+  <div *ngIf="notification?.order" class="notification">
+    <div class="notification--image-container">
+      <img src="assets/images/profile_image_placeholder.png" alt="Profile Image" class="profile_image" />
+      <mat-icon class="icon">shopping_cart</mat-icon>
+    </div>
+
+    <span class="tag"
+      ><!--Coment to remove trailing whitespace-->
+      {{ notification?.order.first_name }} {{ 'ADMIN.PLACED_AN_ORDER_OF' | translate }} <strong>${{ notification?.order.cart.total_price }}</strong> {{ 'ADMIN.FROM' | translate }}
+      {{ notification?.order.state }}.
+    </span>
+    <button mat-icon-button mat-button [matMenuTriggerFor]="sub_menu" [matMenuTriggerData]="{ notification: notification }" (click)="handleSubMenuTrigger($event)">
+      <mat-icon class="notification--more-button">more_vert</mat-icon>
+    </button>
+    <div class="notification--read">
+      <span *ngIf="!notification?.read" class="notification--read-icon"></span>
+    </div>
+  </div>
+  <div *ngIf="notification?.contact_query" class="notification">
+    <div class="notification--image-container">
+      <img src="assets/images/profile_image_placeholder.png" alt="Profile Image" class="profile_image" />
+      <mat-icon class="icon icon-message">message</mat-icon>
+    </div>
+    <span class="tag">{{ notification?.contact_query.name }} {{ 'ADMIN.SENT_A_NEW_QUERY' | translate }}</span>
+    <button mat-icon-button mat-button [matMenuTriggerFor]="sub_menu" [matMenuTriggerData]="{ notification: notification }">
+      <mat-icon class="notification--more-button">more_vert</mat-icon>
+    </button>
+    <div class="notification--read">
+      <span *ngIf="!notification?.read" class="notification--read-icon"></span>
+    </div>
+  </div>
+</div>
+<mat-menu #sub_menu="matMenu">
+  <ng-template matMenuContent let-notification="notification">
+    <!-- <button mat-menu-item (click)="openNotification(notification)">
+
+      {{"ADMIN.OPEN_RELATED_TABLE" | translate}}
+    </button> -->
+    <button *ngIf="!notification.read" mat-menu-item (click)="$event.stopPropagation(); markAsRead(notification)">
+      {{ 'ADMIN.MARK_AS_READ' | translate }}
+    </button>
+    <button mat-menu-item (click)="$event.stopPropagation(); deleteNotification(notification)">
+      {{ 'ADMIN.REMOVE_THIS_NOTIFICATION' | translate }}
+    </button>
+  </ng-template>
+</mat-menu>

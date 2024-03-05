@@ -1,0 +1,7 @@
+<ion-content>
+  <swiper [config]="slideOpts" class="mySwiper">
+    <ng-template *ngFor="let slide of slides | sort:'index'" swiperSlide>
+      <app-slide [slideData]="slide" [loading]="loading"></app-slide>
+    </ng-template>
+  </swiper>
+</ion-content>

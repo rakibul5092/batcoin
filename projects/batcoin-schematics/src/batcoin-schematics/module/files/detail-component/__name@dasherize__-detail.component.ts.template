@@ -1,0 +1,49 @@
+import {
+  Component,
+  ElementRef,
+  Inject,
+  ViewChild
+} from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+@Component({
+  selector: 'app-<%=name%>-detail',
+  templateUrl: './<%=name%>-detail.component.html',
+  styleUrls: ['./<%=name%>-detail.component.scss']
+})
+export class <%= classify(name) %>DetailComponent {
+
+  @ViewChild('title', { static: true }) titleElement: ElementRef;
+
+   public editMode: boolean = false;
+
+   public form: FormGroup;
+
+   constructor(
+     private fb: FormBuilder,
+     public dialogRef: MatDialogRef<<%= classify(name) %>DetailComponent>,
+     @Inject(MAT_DIALOG_DATA) public data: any,
+   ) {
+     this.form = this.fb.group({
+       _id: [{ value: '', disabled: true }],
+     });
+
+     if (data._id) {
+       this.editMode = true;
+       this.form.patchValue(data);
+     }
+   }
+
+   public close = ()  => this.dialogRef.close();
+
+   public save<%= classify(name) %>(form: FormGroup) {
+     let value = form.getRawValue();
+     if (!this.editMode) {
+       delete value._id;
+     }
+     this.dialogRef.close(value);
+   }
+
+   private setFocus = () => this.titleElement.nativeElement.focus();
+}

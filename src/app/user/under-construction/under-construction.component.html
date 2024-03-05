@@ -1,0 +1,9 @@
+<section>
+  <article>
+    <p>Current language: {{ language }}</p>
+    <h1>{{ 'UNDER_CONSTRUCTION' | translate }}</h1>
+    <p>{{ 'SITE_UNDER_CONSTRUCTION' | translate }}</p>
+    <button class="btn" (click)="translateLanguageTo('fr')">French</button>
+    <button class="btn" (click)="translateLanguageTo('en')">English</button>
+  </article>
+</section>

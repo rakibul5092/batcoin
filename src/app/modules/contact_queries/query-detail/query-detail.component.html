@@ -1,0 +1,27 @@
+<div class="title-box close-button-container">
+  <h2 mat-dialog-title class="tab-title">
+    {{ 'ADMIN.CONTACT_QUERIES.VIEW_QUERY_DETAILS' | translate }}
+  </h2>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dialogRef.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<mat-dialog-content class="mat-typography">
+  <div class="status-details-content">
+    <section>
+      <h4>{{ 'ADMIN.CONTACT_QUERIES.NAME' | translate }}:</h4>
+      <p class="indent">{{ data.name }}</p>
+    </section>
+
+    <section>
+      <h4>{{ 'ADMIN.CONTACT_QUERIES.EMAIL' | translate }}:</h4>
+      <p class="indent">{{ data.email }}</p>
+    </section>
+
+    <section>
+      <h4>{{ 'ADMIN.CONTACT_QUERIES.MESSAGE' | translate }}:</h4>
+      <p class="indent">{{ data.message }}</p>
+    </section>
+  </div>
+</mat-dialog-content>

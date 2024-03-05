@@ -1,0 +1,45 @@
+<div class="title-box close-button-container">
+  <h2 mat-dialog-title class="tab-title">
+    {{ editMode ? 'Edit' : 'Add' }} <%=name%> Details
+  </h2>
+  <button type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="dialogRef.close()">
+    <span aria-hidden="true">&times;</span></button>
+</div>
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="form" (ngSubmit)="save<%= classify(name) %>(form)">
+      <div class="editfields">
+        <div [hidden]="!editMode">
+          <mat-form-field>
+            <mat-label>_id</mat-label>
+            <input
+              matInput
+              formControlName="_id"
+              placeholder="_id"
+              #_id
+              readonly
+            />
+          </mat-form-field>
+        </div>
+      </div>
+  </form>
+  <div class="button-panel modal-controls">
+    <button mat-raised-button
+            color="accent"
+            type="button"
+            matTooltip="Cancel all changes"
+            (click)="close()">Cancel
+    </button>
+    <button mat-raised-button
+            color="primary"
+            (click)="save<%= classify(name) %>(form)"
+            type="button"
+            matTooltip="Save all changes">
+      {{  'Save' }}
+    </button>
+  </div>
+</mat-dialog-content>

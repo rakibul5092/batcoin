@@ -1,0 +1,45 @@
+<div class="title-box close-button-container">
+  <h2 mat-dialog-title class="tab-title">{{ (editMode ? 'COMMON.EDIT' : 'COMMON.ADD') | translate }} {{ 'ADMIN.ORDER_STATUS.ORDER_STATUS_DETAILS' | translate }}</h2>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dialogRef.close()"><span aria-hidden="true">&times;</span></button>
+</div>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" (ngSubmit)="saveStatus(form)">
+    <div class="editfields">
+      <mat-form-field>
+        <mat-label>{{ 'ADMIN.ORDER_STATUS.NAME' | translate }} </mat-label>
+        <input matInput formControlName="name" [placeholder]="'ADMIN.ORDER_STATUS.NAME' | translate" #name (keyup.esc)="close()" (keyup.enter)="saveStatus(form)" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'ADMIN.ORDER_STATUS.DESCRIPTION' | translate }} </mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          [placeholder]="'ADMIN.ORDER_STATUS.DESCRIPTION' | translate"
+          #description
+          (keyup.esc)="close()"
+          (keyup.enter)="saveStatus(form)"
+        ></textarea>
+      </mat-form-field>
+      <div class="mat-form-field-wrapper">
+        <mat-checkbox formControlName="active" #active>
+          {{ 'ADMIN.ORDER_STATUS.ACTIVE' | translate }}
+        </mat-checkbox>
+      </div>
+      <div class="mat-form-field-wrapper">
+        <mat-checkbox formControlName="default_status" #defaultStatus>
+          {{ 'ADMIN.ORDER_STATUS.DEFAULT_STATUS' | translate }}
+        </mat-checkbox>
+      </div>
+    </div>
+    <div class="button-panel modal-controls">
+      <button mat-raised-button color="accent" type="button" (click)="close()" [matTooltip]="'ADMIN.ORDER_STATUS.CANCEL_ALL_CHANGES' | translate">
+        {{ 'ADMIN.ORDER_STATUS.CANCEL' | translate }}
+      </button>
+      <button mat-raised-button color="primary" type="submit" [matTooltip]="'ADMIN.ORDER_STATUS.SAVE_ALL_CHANGES' | translate">
+        {{ 'COMMON.SAVE' | translate }}
+      </button>
+
+      <!-- [disabled]="form.pristine || form.invalid" -->
+    </div>
+  </form>
+</mat-dialog-content>

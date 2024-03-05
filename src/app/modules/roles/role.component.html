@@ -1,0 +1,14 @@
+<lib-ag-grid
+  [enableExport]="true"
+  [loading$]="loading$"
+  [title]="'ADMIN.ROLE.ROLES' | translate"
+  [rowData]="roles"
+  [columnDefs]="columnDefs"
+  [pagination]="true"
+  [model]="model"
+  (refreshData)="getData()"
+  (pageChange)="pageChange($event)"
+  (addData)="addEditItem()"
+  (changeData)="toggleDeletedItems()"
+  (exportEvent)="onExport($event)"
+></lib-ag-grid>

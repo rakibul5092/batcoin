@@ -1,0 +1,166 @@
+ion-grid.container {
+  height: 100vh;
+  padding: 0;
+
+  .image-text-wrapper {
+    position: relative;
+    padding: 0;
+
+    .image-wrapper {
+      width: 100%;
+    }
+
+    .image-wrapper img.loaded {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    ::ng-deep .coin-img {
+      width: 65%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      z-index: 1;
+
+      img {
+        width: 100%;
+        object-fit: contain;
+        max-width: 330px;
+        max-height: 50vh;
+        transition: transform 0.75s ease-in-out;
+        transform: scale(1.01, 1.01);
+      }
+
+      &:hover img {
+        transform: scale(1.2, 1.2);
+      }
+    }
+  }
+
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    box-shadow: 0 0 20px #e3e3e3;
+
+    h2,
+    h3,
+    h4 {
+      color: var(--ion-text-color);
+      text-align: center;
+      transform-origin: 50% 50%;
+      opacity: 1;
+      transform: translate(0px, 0px);
+      max-width: 80%;
+    }
+
+    h2 {
+      line-height: 65px;
+      letter-spacing: 1px;
+      font-weight: 300;
+      font-size: 60px;
+    }
+
+    h3 {
+      line-height: 68px;
+      letter-spacing: 10px;
+      font-weight: 300;
+      font-size: 40px;
+    }
+
+    h4 {
+      color: #7d7d7d;
+      line-height: 25px;
+      letter-spacing: 3px;
+      font-weight: 300;
+      font-size: 13px;
+    }
+
+    button {
+      font-size: 14px;
+      padding: 25px 40px;
+      transition: all 0.5s ease;
+      text-transform: uppercase;
+      width: fit-content;
+      color: #7d7d7d;
+
+      &:hover {
+        background-color: #000;
+        color: #fff;
+        border-color: #fff;
+      }
+
+      .divider {
+        display: inline-block;
+        margin: 0 30px;
+        width: 3px;
+        height: 20px;
+        vertical-align: middle;
+        background-color: #7d7d7d;
+      }
+
+      &:hover .divider {
+        background-color: #fff;
+      }
+
+      span {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .edge-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: -120px 0 50px -50px #e3e3e3 inset;
+    border-right: 5px solid #e3e3e3;
+  }
+
+  .coin-img lib-progressive-image {
+    img {
+      object-fit: contain !important;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  ion-grid.container {
+    height: calc(100vh - var(--side-menu-height));
+    min-height: auto;
+
+    ion-col {
+      height: 40%;
+    }
+
+    .text-wrapper {
+      height: 60%;
+      // h4 {
+      //     margin-bottom: 5px;
+      // }
+      h2 {
+        font-size: 35px;
+        line-height: 40px;
+      }
+      h3 {
+        line-height: 30px;
+        letter-spacing: 5px;
+        font-size: 25px;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 25px 30px;
+      }
+    }
+  }
+  .coin-img {
+    max-width: 270px;
+  }
+}

@@ -1,0 +1,73 @@
+<ion-content>
+  <ion-grid class="container">
+    <ion-row class="ion-justify-content-around">
+      <ion-col size="12" size-lg="10" class="ion-padding">
+        <app-title [content]="'USER.PRODUCT.PRODUCT_DETAILS' | translate"></app-title>
+        <!-- Product Details -->
+        <ion-row class="product-details-wrapper">
+          <ion-col size="12" size-md="6" class="image-product-wrapper">
+            <ion-row *ngIf="!loading && product">
+              <ion-col size="4" class="slide-images">
+                <ng-template ngFor let-image [ngForOf]="product.progressiveImages " let-i="index">
+                  <app-image-with-loading [image]="image.url" (click)="transform(image)"> </app-image-with-loading>
+                </ng-template>
+              </ion-col>
+              <ion-col size="8" class="image-zoom-wrapper" *ngIf="fullresImage">
+                <div class="onsale-wrapper" *ngIf="product.prevPrice">
+                  <p>{{'USER.PRODUCT.SALE' | translate}}</p>
+                </div>
+                <div class="image-zoom">
+                  <lib-ngx-image-zoom
+                    [thumbImage]="fullresImage"
+                    [fullImage]="fullresImage"
+                    [enableScrollZoom]="true"
+                    [enableLens]="true"
+                    [magnification]="1.5"
+                    [lensHeight]="120"
+                    [lensWidth]="120"
+                  ></lib-ngx-image-zoom>
+                </div>
+                <p>{{"USER.PRODUCT.CATEGORY" | translate}}: {{(product.category | dynamicTranslate)?(product.category | dynamicTranslate): product.category}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size-md="6" size-lg="5" class="text-wrapper" *ngIf="!loading && product">
+            <h4 class="">{{(product.category | dynamicTranslate)?(product.category | dynamicTranslate): product.category }}</h4>
+            <h2 class="">{{ product.title | dynamicTranslate}}</h2>
+            <div class="price-wrapper">
+              <p class="previous-price" *ngIf="product.prevPrice">${{ product.prevPrice }}</p>
+              <p class="current-price">${{ product.currentPrice }}</p>
+            </div>
+            <h3 class="">{{ product.description | dynamicTranslate }}</h3>
+            <div class="cart-options">
+              <ion-item lines="none">
+                <ion-label position="stacked">{{"USER.PRODUCT.QUANTITY" | translate}}</ion-label>
+                <ion-input
+                  (change)="verifyQuantity()"
+                  [ngClass]="{'invalid-input' : quantity < 1}"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                  type="number"
+                  value="1"
+                  min="1"
+                  [(ngModel)]="quantity"
+                ></ion-input>
+              </ion-item>
+              <button class="btn" (click)="addToCart()" [disabled]="quantity < 1">{{"USER.PRODUCT.ADD_TO_CART" | translate}}</button>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <!-- Related Products -->
+        <div class="related-products" *ngIf="product">
+          <app-title [content]="'USER.PRODUCT.RELATED_PRODUCTS' | translate"></app-title>
+          <ion-row>
+            <ion-col size="12" size-sm="10" size-md="5" size-lg="3" class="list-item-wrapper" *ngFor="let data of products;">
+              <app-related-item [item]="data"></app-related-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+    <app-footer></app-footer>
+  </ion-grid>
+</ion-content>

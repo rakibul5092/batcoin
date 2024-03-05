@@ -1,0 +1,15 @@
+<ion-card (click)="openProduct()" *ngIf="item">
+  <div class="image-container">
+    <app-image-with-loading class="list-item-image" height="200px" width="395px" [image]="item.imageUrl"> </app-image-with-loading>
+  </div>
+  <ion-card-header>
+    <ion-card-title>{{ item.title | dynamicTranslate }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div class="price-wrapper">
+      <p class="previous-price" *ngIf="item.prevPrice">${{ item.prevPrice }}</p>
+      <p class="current-price">${{ item.currentPrice }}</p>
+    </div>
+    <a (click)="addToCart($event)" class="underline-from-left">{{ addToCartMessage }}</a>
+  </ion-card-content>
+</ion-card>

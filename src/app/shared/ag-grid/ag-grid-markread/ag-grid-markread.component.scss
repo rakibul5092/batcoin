@@ -1,0 +1,12 @@
+.ag-grid-btn {
+  margin-top: -12px;
+}
+
+.no-action {
+  opacity: 0.6;
+  color: darkgreen;
+  pointer-events: none;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

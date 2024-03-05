@@ -1,0 +1,21 @@
+h4 {
+  font-weight: bold;
+  margin: 0;
+}
+
+p {
+  margin: 5px;
+  margin-top: 0;
+}
+
+.indent {
+  padding-left: 0.8rem;
+}
+
+section {
+  margin-top: 1.6rem;
+  border-bottom: 1px solid lightgray;
+  &:first-child {
+    margin-top: 0;
+  }
+}
